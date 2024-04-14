@@ -1,5 +1,5 @@
-/* x < 600px height */
-@media screen and (max-height: 600px)
+/* x < 400px height */
+@media screen and (max-height: 400px)
 {
     header
     {

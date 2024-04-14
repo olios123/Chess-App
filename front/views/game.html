@@ -6,17 +6,21 @@
     <title>Document</title>
 
     {{> head}}
+
+    <link rel="stylesheet" href="/public/css/pages/game.css">
 </head>
 <body>
 
-    <header>
+    <header class="space-between">
         <a class="header-main" href="/">
-            <i class="fi fi-sr-chess-bishop"></i>
+            <i class="fi fi-sr-chess-bishop center"></i>
             <h1>Chess</h1>
         </a>
-        <i class="fi fi-sr-leave"></i>
+        <a href="/">
+            <i class="fi fi-sr-leave center"></i>
+        </a>
+        
     </header>
-    <i class="fi fi-sr-leave h"></i>
 
     <main>
 
@@ -24,7 +28,7 @@
         <div class="layer popup center">
             <div class="searching-for-opponent center">
                 <div class="box column">
-                    <h2>Oczekiwanie na przeciwnika</h2>
+                    <h2 class="text-center">Oczekiwanie na przeciwnika</h2>
                     <div class="searching-for-opponent-animation center" id="anim"></div>
 
                     <script src="/public/js/anim.js"></script>
@@ -35,6 +39,10 @@
         </div>
 
 
+        <div class="user-info vertical" style="margin-top: 8%;">
+            <h2>Status:</h2>
+            <div class="status"></div>
+        </div>
         <!-- <div class="user-info vertical" style="margin-top: 1em;">
             <div class="user">
                 <p game="player2Nick">-</p>
@@ -45,6 +53,17 @@
         </div> -->
         <div class="board">
             <div id="myBoard"></div>
+        </div>
+
+        <div class="user-info box vertical column" style="margin-top: 1em;">
+            <h2>PGN:</h2>
+            <table class="pgn">
+                <tr>
+                    <th></th>
+                    <th>Białe</th>
+                    <th>Czarne</th>
+                </tr>
+            </table>
         </div>
 
         <!-- <div class="user-info vertical" style="margin-bottom: 1em;">
@@ -63,6 +82,20 @@
         </div> -->
 
         <div class="right-panel horizontal">
+            <div class="user-info" style="margin-top: 8%;">
+                <h2>Status:</h2>
+                <div class="status"></div>
+            </div>
+            <div class="user-info box column" style="margin-top: 1em;">
+                <h2>PGN:</h2>
+                <table class="pgn">
+                    <tr>
+                        <th></th>
+                        <th>Białe</th>
+                        <th>Czarne</th>
+                    </tr>
+                </table>
+            </div>
             <!-- <div class="right-panel-user column">
                 <div class="clock" style="border-bottom: 4px solid var(--secondary-color);">
                     <h2 class="center" game="player2Clock">-</h2>
@@ -71,15 +104,15 @@
                     <p game="player2Nick" class="center">-</p>
                 </div>
             </div> -->
-            <div class="box">
+            <!-- <div class="box">
                 <div class="game-info center">
-                    <!-- <i class="fi fi-sr-flame" style="width: 40%;"></i> -->
+                    <i class="fi fi-sr-flame" style="width: 40%;"></i>
                     <div class="column" style="width: 100%;">
                         <label>Status:</label>
-                        <div id="status"></div>
+                        <div class="status"></div>
                         <hr>
                         <label>PGN:</label>
-                        <table id="pgn">
+                        <table class="pgn">
                             <tr>
                                 <th></th>
                                 <th>Białe</th>
@@ -88,13 +121,13 @@
                         </table>
                     </div>
                 </div>
-                <!-- <div class="options center">
+                <div class="options center">
                     <i class="fi fi-sr-undo"></i>
                     <i class="fi fi-sr-handshake"></i>
                     <i class="fi fi-sr-flag"></i>
-                </div> -->
+                </div>
             </div>
-            <!-- <div class="right-panel-user column">
+            <div class="right-panel-user column">
                 <div class="user center">
                     <p game="player1Nick" class="center">-</p>
                 </div>

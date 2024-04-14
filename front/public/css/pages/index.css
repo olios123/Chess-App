@@ -3,7 +3,6 @@ main
     flex-direction: row;
     justify-content: space-evenly !important;
     padding: 2em;
-    height: 100%;
 }
 
 body
@@ -30,14 +29,6 @@ body
         width: 100% !important;
         padding: 1em;
     }    
-}
-
-@media screen and (max-width: 400px)
-{
-    header h1
-    {
-        display: none;
-    }
 }
 
 @media screen and (max-width: 500px) 
@@ -99,7 +90,15 @@ body
         width: 100% !important;
         height: 100%;
         backdrop-filter: blur(0.4em);
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+@media screen and (orientation: portrait) 
+{
+    main
+    {
+        height: 100%;
     }
 }
 
@@ -297,7 +296,7 @@ a.find-game p
 
 .find-game
 {
-    padding: 2em;
+    padding: 2em 2em 0 2em;
     border-radius: 1em;
 }
 .find-game input
@@ -306,6 +305,10 @@ a.find-game p
     font-size: 1em;
     margin: 1em 0;
     text-align: center;
+}
+.find-game button
+{
+    border: 2px solid var(--secondary-color);
 }
 
 div#errorMessage

@@ -1,8 +1,8 @@
 let gameHasStarted = false;
-var board = null
-var game = new Chess()
-var $status = $('#status')
-var $pgn = $('#pgn')
+let board = null
+let game = new Chess()
+let stat = document.querySelectorAll('.status')
+let pgn = document.querySelectorAll('.pgn')
 let gameOver = false;
 
 function onDragStart (source, piece, position, orientation) {
@@ -54,64 +54,79 @@ function onSnapEnd () {
 function updateStatus () {
     var status = ''
 
-    var moveColor = 'White'
+    var moveColor = 'Białe'
     if (game.turn() === 'b') {
-        moveColor = 'Black'
+        moveColor = 'Czarne'
     }
 
     // checkmate?
-    if (game.in_checkmate()) {
-        status = 'Game over, ' + moveColor + ' is in checkmate.'
+    if (game.in_checkmate()) 
+    {
+        displayWin("poprzez <b>mata<b>.")
+        status = 'Koniec gry, ' + moveColor + ', szach mat.'
     }
 
     // draw?
     else if (game.in_draw()) {
-        status = 'Game over, drawn position'
+        status = 'Koniec gry, remis.'
     }
 
     else if (gameOver) {
-        status = 'Opponent disconnected, you win!'
+        status = 'Koniec gry, przeciwnik wyszedł!'
+        displayWin("przeciwnik porzucił partię.")
     }
 
     else if (!gameHasStarted) {
-        status = 'Waiting for black to join'
+        status = 'Oczekiwanie na dołączenie przeciwnika.'
     }
 
     // game still on
     else {
-        status = moveColor + ' to move'
+        status = moveColor + ' ruch.'
 
         // check?
         if (game.in_check()) {
-            status += ', ' + moveColor + ' is in check'
+            status += ', ' + moveColor + ' szach'
         }
         
     }
 
-    $status.html(status)
 
-    // TODO crashuje grę
+    let gamePgn = game.pgn().split(' ')
+    let htmlPgn = "<tr><th></th><th>Białe</th><th>Czarne</th></tr>"
 
-    // const gamePgn = game.pgn().split(' ')
-    // const slicedPgn = []
+    let slicedPgn = []
 
-    // for (let i = 0; i < gamePgn.length; i += 3)
-    // {
-    //     slicedPgn.push(gamePgn.slice(i, i + 3))
-    // }
+    for (let i = 0; i < gamePgn.length; i += 3)
+    {
+        slicedPgn.push(gamePgn.slice(i, i + 3))
+    }
 
-    // const htmlPgn = "<tr><th></th><th>Białe</th><th>Czarne</th></tr>"
+    if (slicedPgn[0] != '')
+    {
+        slicedPgn.forEach(l => 
+        {
+            const number = l[0]
+            const white = (l.length > 1) ? l[1] : ""
+            const black = (l.length > 2) ? l[2] : ""
+    
+            htmlPgn += "<tr><td>" + number + "</td><td>" + white + "</td><td>" + black + "</td></tr>"
+        })
+    }
+    
 
-    // slicedPgn.forEach(l => 
-    // {
-    //     const number = l[0]
-    //     const white = l[1]
-    //     const black = (l.length > 1) ? l[2] : ""
 
-    //     htmlPgn += "<tr><td>" + number + "</td></tr><td>" + white + "</td><td>" + black + "</td>"
-    // })
+    // Update game status
+    stat.forEach(s => 
+    {
+        s.innerHTML = status
+    })
 
-    // $pgn.html(htmlPgn)
+    // Update PGN
+    pgn.forEach(p =>
+    {
+        p.innerHTML = htmlPgn
+    })    
 }
 
 var config = {
@@ -155,4 +170,26 @@ socket.on('startGame', function() {
 socket.on('gameOverDisconnect', function() {
     gameOver = true;
     updateStatus()
-});
+})
+
+function displayWin(reason) 
+{
+    const winElement = '<div class="layer popup center hide"><div class="you-win center"><div class="box column"><h2>Wygrałeś!</h2><p>' + reason + '</p><a class="cancel" href="/">Powrót</a></div></div></div>'
+
+    const main = document.querySelector('main')
+    main.innerHTML += winElement
+
+    const popup = main.children[main.children.length - 1]
+    popup.classList.remove("hide")
+}
+
+function displayLose(reason) 
+{
+    const loseElement = '<div class="layer popup center hide"><div class="you-lose center"><div class="box column"><h2>Przegrałeś!</h2><p>' + reason + '</p><a class="cancel" href="/">Powrót</a></div></div></div>'
+
+    const main = document.querySelector('main')
+    main.innerHTML += loseElement
+
+    const popup = main.children[main.children.length - 1]
+    popup.classList.remove("hide")
+}
