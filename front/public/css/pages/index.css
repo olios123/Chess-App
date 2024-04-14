@@ -1,0 +1,320 @@
+main
+{
+    flex-direction: row;
+    justify-content: space-evenly !important;
+    padding: 2em;
+    height: 100%;
+}
+
+body
+{
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1100px) 
+{
+    main
+    {
+        padding: 0;
+    }
+    .game-main
+    {
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 800px) 
+{
+    .game-main
+    {
+        width: 100% !important;
+        padding: 1em;
+    }    
+}
+
+@media screen and (max-width: 400px)
+{
+    header h1
+    {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) 
+{
+    header i
+    {
+        font-size: 2em;
+        padding: 0 0.2em;
+    }
+    h1.title
+    {
+        font-size: 3em !important;
+    }
+    a.find-game
+    {
+        padding: 1.5em !important;
+    }
+    a.find-game i
+    {
+        margin: 0 !important;
+        font-size: 4em !important;
+    }
+    a.find-game .find-game-info h2
+    {
+        font-size: 1.8em;
+    }
+}
+
+@media screen and (min-width: 1500px) 
+{
+    .board-main
+    {
+        width: 40vw !important;
+    }
+    .board-main section
+    {
+        grid-template-columns: repeat(8, 5vw) !important;
+        grid-template-rows: repeat(8, 5vw) !important;
+    }
+}
+
+@media screen and (max-width: 1400px)
+{
+    main
+    {
+        background-image: url("./../../assets/gif/game1.gif");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 0 !important;
+    }
+
+    .board-main
+    {
+        display: none;
+    }
+    .game-main
+    {
+        width: 100% !important;
+        height: 100%;
+        backdrop-filter: blur(0.4em);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+h1
+{
+    font-size: 2em;
+}
+
+.profile
+{
+    width: 200px;
+    height: 100%;
+    display: flex;
+    padding: .5em;
+    align-items: center;
+    justify-content: center;
+}
+.profile img
+{
+    aspect-ratio: 1 / 1;
+    height: 100%;
+}
+.profile h2
+{
+    margin: 0 .5em;
+}
+.profile span
+{
+    margin-top: .5em;
+}
+
+
+.create-account
+{
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 0.5em;
+}
+
+button.login
+{
+    background-color: var(--white-color);
+    color: black;
+}
+button.login:hover
+{
+    background-color: #d3d3d3;
+}
+
+button.register
+{
+    background-color: var(--green-color);
+    margin-left: 1em;
+}
+button.register:hover
+{
+    background-color: rgb(153, 199, 137);
+}
+
+.account-page-scroll
+{
+    display: flex;
+    width: 600px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.5s ease-in-out right;
+    right: 0;
+}
+.account-page-scroll.display-register
+{
+    right: 300px;
+}
+.account-page-scroll.no-transition
+{
+    transition: none !important;
+}
+
+.login-page,
+.register-page
+{
+    position: absolute;
+    right: 0;
+    top: calc(8vh - 1px);
+    width: 300px;
+    max-height: 325px;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    border-radius: 0 0 1em 1em;
+    transition: .5s ease-in-out max-height;
+}
+.login-page.hidden,
+.register-page.hidden
+{
+    max-height: 0;
+}
+form.account
+{
+    width: 100%;
+    height: 100%;
+    margin: 3em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form.account label
+{
+    margin-bottom: .15em;
+}
+form.account input
+{
+    margin-bottom: 1em;
+}
+form.account button
+{
+    margin-top: .75em;
+}
+
+form.account-register
+{
+    margin: 1.5em 0;
+}
+
+form#game
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-main
+{
+    width: 35vw;
+}
+h1.title
+{
+    font-size: 4vw;
+    text-align: center;
+    margin-bottom: 1em;
+}
+.statistic p:first-child
+{
+    margin-right: 2em;
+}
+a.find-game
+{
+    padding: 3em;
+    margin-bottom: 1em;
+    border-radius: 1em;
+    background-color: var(--green-color);
+}
+a.find-game:hover
+{
+    background-color: rgb(153, 199, 137);
+}
+a.find-game div.find-game-info
+{
+    height: 6em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+a.find-game div h2
+{
+    font-size: 2.5em;
+}
+a.find-game i
+{
+    font-size: 6em;
+    margin: 0 0.3em 0 0;
+    padding: 0;
+}
+a.find-game p
+{
+    font-size: 1.25em;
+}
+
+.board-main
+{
+    height: 90%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    margin-right: 5%;
+}
+.board-main img
+{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.find-game
+{
+    padding: 2em;
+    border-radius: 1em;
+}
+.find-game input
+{
+    padding: 0.5em 1em;
+    font-size: 1em;
+    margin: 1em 0;
+    text-align: center;
+}
+
+div#errorMessage
+{
+    padding: 0.8em;
+    border-radius: 1em;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+div#errorMessage:empty
+{
+    padding: 0;
+}

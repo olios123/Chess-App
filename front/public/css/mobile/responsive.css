@@ -1,0 +1,214 @@
+/* x < 600px height */
+@media screen and (max-height: 600px)
+{
+    header
+    {
+        display: none;
+    }
+
+    .fi-sr-leave.h
+    {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 0;
+    }
+
+    main
+    {
+        height: 100vh !important;
+    }
+    .right-panel.horizontal
+    {
+        padding: 0;
+        justify-content: space-between;
+    }
+
+    .right-panel .user p,
+    .right-panel .box .game-info p
+    {
+        font-size: 0.75em !important;
+    }
+    .right-panel .clock
+    {
+        padding: 0.8em 1.5em;
+    }
+    .right-panel .clock h2
+    {
+        font-size: 1em !important;
+    }
+    .right-panel .box .game-info i
+    {
+        font-size: 1.75em !important;
+    }
+    .right-panel .box .game-info h2
+    {
+        font-size: 0.75em !important;
+    }
+    .right-panel .options i
+    {
+        font-size: 0.8em !important;
+    }
+}
+
+/* x > 601px height */
+@media screen and (min-height: 601px)
+{
+    .fi-sr-leave.h
+    {
+        display: none !important;
+    }
+}
+
+
+/* x < 700px height */
+@media screen and (max-height: 700px)
+{
+    main .user-info
+    {
+        margin: 0;
+    }
+}
+
+/* x > 800px width */
+@media screen and (min-width: 800px) 
+{
+    main .user-info .user p,
+    main .user-info .clock h2
+    {
+        font-size: 2em;
+    }
+
+    main .panel i
+    {
+        font-size: 2em;
+    }
+
+    .right-panel .clock h2
+    {
+        font-size: 2em;
+    }
+}
+
+/* x > 1000px width */
+@media screen and (min-width: 1000px)
+{
+    header i
+    {
+        font-size: 1.8em;
+    }
+}
+
+/* x > 1500px width and x > 1000px height */
+@media screen and (min-width: 1500px) and (min-height: 1000px)
+{
+    main
+    {
+        width: 100vw;
+    }
+    i 
+    {
+        font-size: 2em;
+    }
+
+    .right-panel
+    {
+        max-width: 340px;
+    }
+    .right-panel .user p,
+    .right-panel .box .game-info p
+    {
+        font-size: 1.5em !important;
+    }
+    .right-panel .clock h2
+    {
+        font-size: 3em !important;
+    }
+    .right-panel .box .game-info i 
+    {
+        font-size: 4em !important;
+    }
+    .right-panel .box .game-info h2
+    {
+        font-size: 2em !important;
+    }
+
+    nav.hidden
+    {
+        position: static;
+        display: flex !important;
+        width: auto;
+    }
+    .layer
+    {
+        display: none;
+    }
+    nav i
+    {
+        display: none;
+    }
+    nav.menu 
+    {
+        height: 90vh;
+    }
+    nav .menu-items
+    {
+        width: 12.5vw;
+    }
+    nav .menu-items h2
+    {
+        display: none;
+    }
+}
+
+/* x > 1300px */
+@media screen and (min-width: 1300px) 
+{
+    .right-panel .user p,
+    .right-panel .box .game-info p
+    {
+        font-size: 1.5em;
+    }
+    .right-panel .clock h2
+    {
+        font-size: 3em;
+    }
+    .right-panel .box .game-info i
+    {
+        font-size: 4em;
+    }
+    .right-panel .box .game-info h2
+    {
+        font-size: 2em;
+    }
+}
+
+/* Horizontal */
+@media (orientation: landscape)
+{
+    .vertical
+    {
+        display: none !important;
+    }
+
+    .horizontal
+    {
+        display: flex !important;
+    }
+
+    .board
+    {
+        width: auto;
+        height: 100%;
+        margin-right: 5vw;
+    }
+
+    main
+    {
+        flex-direction: row;
+        align-items: center;
+        padding: 1vh 2vw;
+        height: 92vh;
+        width: 100vw;
+    }
+}

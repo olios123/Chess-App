@@ -1,0 +1,313 @@
+main
+{
+    background-color: var(--background-color);
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vw;
+    /*margin: 2vh 0;*/
+
+    max-width: 2000px;
+}
+
+section
+{
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    display: grid;
+
+    /* justify-content: center; */
+    align-items: center;
+}
+
+#myBoard 
+{
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.board
+{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+article
+{
+    display: block;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: 100%;
+    transition: .1s ease-in-out border;
+}
+article[selected]
+{
+    border: .35em solid #38DCFF;
+}
+article[attack]
+{
+    border: .35em solid #D80032;
+}
+
+article.white
+{
+    background-color: var(--accent-color);
+}
+article.black
+{
+    background-color: var(--secondary-color);
+}
+
+article.white[dot],
+article.black[dot]
+{
+    background-image: url("./../assets/icons/move-dot.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4.5vh;
+}
+
+.user-info
+{
+    width: 100%;
+    height: auto;
+    padding: 1em 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-info .user p
+{
+    font-size: 1rem;
+}
+
+.clock
+{
+    background-color: var(--primary-color);
+    border-radius: .5em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+.clock h2
+{
+    padding: .25em .5em;
+}
+.clock.active
+{
+    background-color: var(--secondary-color);
+    opacity: 100% !important;
+}
+.clock.short-time
+{
+    background-color: var(--red-color);
+    opacity: 50%;
+}
+
+.panel
+{
+    width: 90%;
+    height: auto;
+    padding: .2em 0;
+    border-radius: .5em;
+    margin-bottom: 1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel i:hover
+{
+    background-color: var(--hover-color);
+}
+
+.right-panel
+{
+    width: auto;
+    max-width: 25vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.right-panel .box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5em;
+    padding: .5em 1em;
+}
+.right-panel .box .options
+{
+    width: 100%;
+    border-top: 2px solid var(--secondary-color);
+    padding-top: .5em;
+}
+.right-panel .box .game-info
+{
+    width: 100%;
+    margin: .375em 0 .5em 0;
+}
+.right-panel .box .game-info i
+{
+    font-size: 3em;
+}
+.right-panel .box .options i
+{
+    font-size: 1.8em;
+}
+.right-panel-user
+{
+    background-color: var(--primary-color);
+    border-radius: .5em;
+    width: 100%;
+}
+.right-panel-user .clock
+{
+    padding: 1em 2.5em;
+    border-radius: .5em;
+    width: 100%;
+}
+.right-panel-user .user p
+{
+    font-size: 1em;
+    background-color: var(--primary-color);
+    padding: .5em 0;
+    width: 100%;
+}
+.right-panel.horizontal
+{
+    height: 90vh;
+    justify-content: space-evenly;
+    padding: 2.5em 0;
+}
+
+.layer.popup
+{
+    top: 0;
+    opacity: 100%;
+    transition: 0.5s ease-in-out opacity;
+}
+.layer.popup.hide
+{
+    opacity: 0;
+    transition: 0.5s ease-in-out opacity;
+}
+
+.searching-for-opponent .box,
+.you-win .box,
+.you-lose .box
+{
+    padding: 0.5em 1em;
+    -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 1);
+}
+.searching-for-opponent .box h2,
+.you-win .box h2,
+.you-lose .box h2
+{
+    padding: 0.5em 0;
+}
+.searching-for-opponent-animation
+{
+    aspect-ratio: 1 / 1;
+    width: 100%;
+}
+.searching-for-opponent .box a,
+.you-win .box a,
+.you-lose .box a
+{
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+}
+
+.searching-for-opponent-animation img
+{
+    width: 70%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float
+{
+    0%
+    {
+        filter: drop-shadow(0 15px 3px rgba(0,0,0,0.6));
+        transform: translatey(0px);
+    }
+    50%
+    {
+        filter: drop-shadow(0 35px 6px rgba(0,0,0,0.2));
+        transform: translatey(-20px);
+    }
+    100%
+    {
+        filter: drop-shadow(0 15px 3px rgba(0,0,0,0.6));
+        transform: translatey(0px);
+    }
+}
+
+.you-win .box
+{
+    border: 0.5em solid;
+    border-color: var(--green-color);
+    padding: 1em 2em;
+}
+.you-win .box p,
+.you-lose .box p
+{
+    font-weight: 300;
+    margin-bottom: 2em;
+}
+.you-win .box a,
+.you-lose .box a
+{
+    margin: 0.35em 0;
+    width: 100%;
+    text-align: center;
+}
+.you-win .box a:nth-child(3),
+.you-lose .box a:nth-child(3)
+{
+    background-color: var(--green-color);
+}
+
+.you-lose .box
+{
+    border: 0.5em solid;
+    border-color: var(--red-color);
+    padding: 1em 2em;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+
+    {{> head}}
+
+    <link rel="stylesheet" href="/public/css/pages/index.css">
+    
+</head>
+<body>
+
+    <header>
+        <a class="header-main" href="/">
+            <i class="fi fi-sr-chess-bishop"></i>
+            <h1>Chess</h1>
+        </a>
+
+        <div class="create-account">
+            <a href="https://github.com/olios123">
+                <img src="/public/img/github.png">
+            </a>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="board-main center">
+            <img src="/public/assets/gif/game1.gif" alt="">
+        </div>
+        <div class="game-main column">
+            <h1 class="title">Najlepsze szachy internetowe!</h1>
+            <div class="statistic row space-between">
+                <p class="light text-center">Rozegranych parti: <b>1500</b></p>
+                <p class="light text-center">Zarejestrowanych graczy: <b>230</b></p>
+            </div>
+
+            <div class="find-game column center">
+                <h2>Kod pokoju</h2>
+                <input type="text" id="codeInput">
+                <div class="center">
+                    <button style="margin-right: 0.5em;" id="createGame">Stwórz pokój</button>
+                    <button id="joinGame">Dołącz do gry</button>
+                </div>
+                
+                <div class="text-center" style="color: red; margin-top: 1em;" id="errorMessage"></div>
+            </div>
+        </div>
+        
+    </main>
+
+    <script>
+        $('#createGame').on('click', function() {
+            window.location.replace('/white?code=' + $('#codeInput').val());
+        });
+        $('#joinGame').on('click', function() {
+            window.location.replace('/black?code=' + $('#codeInput').val());
+        });
+
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') == 'invalidCode') {
+            $('#errorMessage').text('Nieprawidłowy kod. Stwórz pokój lub podaj prawidłowy kod.');
+        }
+    </script>
+</body>
+</html>

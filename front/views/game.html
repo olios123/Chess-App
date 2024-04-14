@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {{> head}}
+</head>
+<body>
+
+    <header>
+        <a class="header-main" href="/">
+            <i class="fi fi-sr-chess-bishop"></i>
+            <h1>Chess</h1>
+        </a>
+        <i class="fi fi-sr-leave"></i>
+    </header>
+    <i class="fi fi-sr-leave h"></i>
+
+    <main>
+
+        <!-- Waiting for opponent -->
+        <div class="layer popup center">
+            <div class="searching-for-opponent center">
+                <div class="box column">
+                    <h2>Oczekiwanie na przeciwnika</h2>
+                    <div class="searching-for-opponent-animation center" id="anim"></div>
+
+                    <script src="/public/js/anim.js"></script>
+
+                    <a class="cancel" href="/">Anuluj</a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="user-info vertical" style="margin-top: 1em;">
+            <div class="user">
+                <p game="player2Nick">-</p>
+            </div>
+            <div class="clock">
+                <h2 game="player2Clock">-</h2>
+            </div>
+        </div> -->
+        <div class="board">
+            <div id="myBoard"></div>
+        </div>
+
+        <!-- <div class="user-info vertical" style="margin-bottom: 1em;">
+            <div class="user">
+                <p game="player1Nick">-</p>
+            </div>
+            <div class="clock">
+                <h2 game="player1Clock">-</h2>
+            </div>
+        </div> -->
+
+        <!-- <div class="panel box vertical">
+            <i class="fi fi-sr-undo"></i>
+            <i class="fi fi-sr-handshake"></i>
+            <i class="fi fi-sr-flag"></i>
+        </div> -->
+
+        <div class="right-panel horizontal">
+            <!-- <div class="right-panel-user column">
+                <div class="clock" style="border-bottom: 4px solid var(--secondary-color);">
+                    <h2 class="center" game="player2Clock">-</h2>
+                </div>
+                <div class="user center">
+                    <p game="player2Nick" class="center">-</p>
+                </div>
+            </div> -->
+            <div class="box">
+                <div class="game-info center">
+                    <!-- <i class="fi fi-sr-flame" style="width: 40%;"></i> -->
+                    <div class="column" style="width: 100%;">
+                        <label>Status:</label>
+                        <div id="status"></div>
+                        <hr>
+                        <label>PGN:</label>
+                        <table id="pgn">
+                            <tr>
+                                <th></th>
+                                <th>Białe</th>
+                                <th>Czarne</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- <div class="options center">
+                    <i class="fi fi-sr-undo"></i>
+                    <i class="fi fi-sr-handshake"></i>
+                    <i class="fi fi-sr-flag"></i>
+                </div> -->
+            </div>
+            <!-- <div class="right-panel-user column">
+                <div class="user center">
+                    <p game="player1Nick" class="center">-</p>
+                </div>
+                <div class="clock" style="border-top: 4px solid var(--secondary-color);">
+                    <h2 class="center" game="player1Clock">-</h2>
+                </div>
+            </div> -->
+        </div>
+
+    </main>
+
+    <script>
+        let playerColor = '{{color}}';
+        console.log('Grasz jako ' + playerColor);
+    </script>
+    <script src="/public/js/index.js"></script>
+
+</body>
+</html>

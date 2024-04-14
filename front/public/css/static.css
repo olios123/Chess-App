@@ -1,0 +1,53 @@
+:root
+{
+	--background-color: #393646;
+	--primary-color: #4F4557;
+	--secondary-color: #6D5D6E;
+	--accent-color: #FAF0E6;
+	--hover-color: #FAF0E640;
+	--white-color: #f5f5f5;
+	--green-color: #A6CF98;
+	--red-color: #FF6868;
+}
+
+.column
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.row
+{
+	display: flex;
+	flex-direction: row;
+}
+
+.center
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.text-center
+{
+	text-align: center;
+}
+
+.space-between
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cancel
+{
+	background-color: var(--red-color);
+}
+.cancel:hover
+{
+	background-color: #e35454;
+}
