@@ -46,6 +46,11 @@ header .create-account i
     padding: 0;
     font-size: 2em;
 }
+.vl
+{
+    border-left: 4px solid var(--primary-color);
+    height: 100%;
+}
 .header-main
 {
     display: flex;

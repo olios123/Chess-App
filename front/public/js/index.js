@@ -5,7 +5,8 @@ let stat = document.querySelectorAll('.status')
 let pgn = document.querySelectorAll('.pgn')
 let gameOver = false;
 
-function onDragStart (source, piece, position, orientation) {
+function onDragStart(source, piece, position, orientation) 
+{
     // do not pick up pieces if the game is over
     if (game.game_over()) return false
     if (!gameHasStarted) return false;
@@ -21,7 +22,8 @@ function onDragStart (source, piece, position, orientation) {
     }
 }
 
-function onDrop (source, target) {
+function onDrop (source, target) 
+{
     let theMove = {
         from: source,
         to: target,
@@ -39,7 +41,8 @@ function onDrop (source, target) {
     updateStatus()
 }
 
-socket.on('newMove', function(move) {
+socket.on('newMove', function(move) 
+{
     game.move(move);
     board.position(game.fen());
     updateStatus();
@@ -47,11 +50,13 @@ socket.on('newMove', function(move) {
 
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
-function onSnapEnd () {
+function onSnapEnd() 
+{
     board.position(game.fen())
 }
 
-function updateStatus () {
+function updateStatus () 
+{
     var status = ''
 
     var moveColor = 'Białe'
@@ -81,14 +86,16 @@ function updateStatus () {
     }
 
     // game still on
-    else {
-        status = moveColor + ' ruch.'
+    else 
+    {
+        status = 'Ruch ' + (moveColor == "Białe") ? 'białych' : 'czarnych'
 
         // check?
-        if (game.in_check()) {
-            status += ', ' + moveColor + ' szach'
+        if (game.in_check()) 
+        {
+            status += ', ' + moveColor + ' szach.'
         }
-        
+        else status += "."
     }
 
 
@@ -115,7 +122,6 @@ function updateStatus () {
     }
     
 
-
     // Update game status
     stat.forEach(s => 
     {
@@ -138,20 +144,24 @@ var config = {
     pieceTheme: '/public/img/chesspieces/wikipedia/{piece}.png'
 }
 board = Chessboard('myBoard', config)
-if (playerColor == 'black') {
+if (playerColor == 'black') 
+{
     board.flip();
 }
 
 updateStatus()
 
 var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('code')) {
-    socket.emit('joinGame', {
+if (urlParams.get('code')) 
+{
+    socket.emit('joinGame', 
+    {
         code: urlParams.get('code')
     });
 }
 
-socket.on('startGame', function() {
+socket.on('startGame', function() 
+{
     gameHasStarted = true;
     updateStatus()
 
@@ -167,7 +177,8 @@ socket.on('startGame', function() {
     }
 });
 
-socket.on('gameOverDisconnect', function() {
+socket.on('gameOverDisconnect', function() 
+{
     gameOver = true;
     updateStatus()
 })

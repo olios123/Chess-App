@@ -1,11 +1,6 @@
 /* x < 400px height */
 @media screen and (max-height: 400px)
 {
-    header
-    {
-        display: none;
-    }
-
     .fi-sr-leave.h
     {
         position: absolute;
@@ -48,6 +43,25 @@
     .right-panel .options i
     {
         font-size: 0.8em !important;
+    }
+}
+
+/* x < 500px height */
+@media screen and (max-height: 500px) 
+{
+    header
+    {
+        display: none;
+    }
+
+    .title
+    {
+        margin-bottom: 0 !important;
+    }
+
+    .find-game
+    {
+        transform: scale(0.9);
     }
 }
 

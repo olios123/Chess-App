@@ -3,11 +3,12 @@ main
     flex-direction: row;
     justify-content: space-evenly !important;
     padding: 2em;
+    background: none;
 }
-
 body
 {
     overflow: hidden;
+    background: none;
 }
 
 @media screen and (max-width: 1100px) 
@@ -27,8 +28,12 @@ body
     .game-main
     {
         width: 100% !important;
-        padding: 1em;
-    }    
+    }
+
+    .title
+    {
+        font-size: 3em !important;
+    }
 }
 
 @media screen and (max-width: 500px) 
@@ -57,28 +62,43 @@ body
     }
 }
 
+@media screen and (min-width: 600px) 
+{
+    .find-game .column:nth-child(2)
+    {
+        margin: 0 2em !important;
+    }
+}
+
 @media screen and (min-width: 1500px) 
 {
-    .board-main
-    {
-        width: 40vw !important;
-    }
     .board-main section
     {
         grid-template-columns: repeat(8, 5vw) !important;
         grid-template-rows: repeat(8, 5vw) !important;
     }
+    .title
+    {
+        font-size: 4em !important;
+    }
 }
 
 @media screen and (max-width: 1400px)
 {
-    main
+    .background
     {
-        background-image: url("./../../assets/gif/game1.gif");
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./../../assets/gif/game1.gif");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        padding: 0 !important;
+        filter: blur(2px);
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
     }
 
     .board-main
@@ -89,17 +109,12 @@ body
     {
         width: 100% !important;
         height: 100%;
-        backdrop-filter: blur(0.4em);
-        background-color: rgba(0, 0, 0, 0.7);
     }
 }
 
-@media screen and (orientation: portrait) 
+.background
 {
-    main
-    {
-        height: 100%;
-    }
+    display: none;
 }
 
 h1
@@ -236,12 +251,13 @@ form#game
 .game-main
 {
     width: 35vw;
+    padding: 0 0.5em;
 }
 h1.title
 {
-    font-size: 4vw;
+    font-size: 4.5vw;
     text-align: center;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 .statistic p:first-child
 {
@@ -283,7 +299,7 @@ a.find-game p
 
 .board-main
 {
-    height: 90%;
+    height: 85%;
     width: auto;
     aspect-ratio: 1 / 1;
     margin-right: 5%;
@@ -296,19 +312,59 @@ a.find-game p
 
 .find-game
 {
-    padding: 2em 2em 0 2em;
     border-radius: 1em;
+    /* display: table; */
+}
+.find-game .column
+{
+    /* display: table-cell; */
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}
+.find-game .column > * 
+{
+    flex: 1;
+}
+.find-game .column:nth-child(2)
+{
+    flex: 0;
+    margin: 0 0.5em;
+}
+.find-game .column:nth-child(3) > *
+{
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.find-game .column input
+{
+    flex: 0;
 }
 .find-game input
 {
     padding: 0.5em 1em;
     font-size: 1em;
-    margin: 1em 0;
+    margin: 0.5em 0 1em 0;
     text-align: center;
+    width: 90%;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    color: var(--accent-color);
 }
 .find-game button
 {
     border: 2px solid var(--secondary-color);
+}
+.find-game h2
+{
+    text-align: center;
+}
+.find-game .column i
+{
+    font-size: 3em;
 }
 
 div#errorMessage
