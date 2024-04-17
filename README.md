@@ -24,6 +24,12 @@ The standard application port is **3750**, you can change it to one that is not 
 > [!WARNING]
 > Do not use ports like: **80, 21, 587, 3306**, etc...
 
+---
+To run the application, enter this command in the console.
+You should then see `Server listening on port {PORT}`. This means that the server is working properly.
+    
+    npm run server
+
 
 # Screenshots
 
