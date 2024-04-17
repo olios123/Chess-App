@@ -3,12 +3,36 @@ module.exports = io => {
         console.log('New socket connection');
 
         let currentCode = null;
+        let handleDisconnecting = true
 
-        socket.on('move', function(move) {
+        // Handle moves
+        socket.on('move', function(move) 
+        {
             io.to(currentCode).emit('newMove', move);
         });
+
+        // Draw
+        socket.on('drawRequest', function(color) 
+        {
+            io.to(currentCode).emit('opponentDrawRequest', color)
+        })
+
+        // Move back
+        socket.on('undoRequest', function(color)
+        {
+            io.to(currentCode).emit('opponentUndoRequest', color)
+        })
+
+        // Give up
+        socket.on('surrender', function(color) 
+        {
+            io.to(currentCode).emit('opponentSurrendered', color)
+            handleDisconnecting = false
+        })
         
-        socket.on('joinGame', function(data) {
+        // Joining to game
+        socket.on('joinGame', function(data) 
+        {
 
             currentCode = data.code;
             socket.join(currentCode);
@@ -20,8 +44,11 @@ module.exports = io => {
             io.to(currentCode).emit('startGame');
         });
 
-        socket.on('disconnect', function() {
-            if (currentCode) {
+        // Disconnecting
+        socket.on('disconnect', function() 
+        {
+            if (currentCode && handleDisconnecting) 
+            {
                 io.to(currentCode).emit('gameOverDisconnect');
                 delete games[currentCode];
             }

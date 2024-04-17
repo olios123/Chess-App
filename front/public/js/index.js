@@ -84,6 +84,27 @@ socket.on('newMove', function(move)
     updateStatus();
 });
 
+socket.on('opponentSurrendered', (color) =>
+{
+    gameOver = true
+    if (color != playerColor) displayWin("przeciwnik się poddał.")
+})
+
+socket.on('opponentDrawRequest', (color) =>
+{
+    const messages = document.querySelectorAll(".message")
+
+    if (color != playerColor)
+    {
+        messages.forEach(msg =>
+        {
+            msg.innerHTML = "<h4>Przeciwnik proponuje remis</h4>"
+        })
+    }
+    
+})
+
+
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
 function onSnapEnd() 
@@ -248,3 +269,39 @@ function displayDraw()
 {
     $('#draw').fadeTo(100, 1);
 }
+
+// Controll buttons
+const undo = document.querySelectorAll('i[action=undo]')
+const draw = document.querySelectorAll('i[action=draw]')
+const surrender = document.querySelectorAll('i[action=surrender]')
+
+undo.forEach(el =>
+{
+    el.addEventListener('click', () =>
+    {
+        socket.emit('undoRequest', playerColor)
+    })
+})
+
+draw.forEach(el =>
+{
+    el.addEventListener('click', () =>
+    {
+        socket.emit('drawRequest', playerColor)
+
+        const messages = document.querySelectorAll(".message")
+        messages.forEach(msg =>
+        {
+            msg.innerHTML = "<h4>Wysłano propozycję remisu...</h4>"
+        })
+    })
+})
+
+surrender.forEach(el =>
+{
+    el.addEventListener('click', () =>
+    {
+        displayLose("poddałeś się.")
+        socket.emit('surrender', playerColor)
+    })
+})

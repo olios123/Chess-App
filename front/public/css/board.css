@@ -168,7 +168,8 @@ article.black[dot]
     align-items: center;
 }
 
-.panel i:hover
+.panel i:hover,
+.options i:hover
 {
     background-color: var(--hover-color);
 }
@@ -239,9 +240,9 @@ article.black[dot]
 }
 .right-panel.horizontal
 {
-    height: 40vh;
+    height: 50vh;
     justify-content: space-between;
-    padding: 2em 1em;
+    padding: 1em;
 }
 
 .layer.popup
@@ -394,4 +395,16 @@ table.pgn tr:nth-child(even)
     height: 30%;
     border-radius: 100%;
     background-color: var(--background-color);
+}
+
+.message
+{
+    width: 100%;
+    height: auto;
+    padding: 0.5em 0;
+}
+
+.message:empty
+{
+    padding: 0;
 }
