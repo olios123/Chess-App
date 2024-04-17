@@ -33,12 +33,14 @@ You should then see `Server listening on port {PORT}`. This means that the serve
 
 # Screenshots
 
+<img src="https://cdn.discordapp.com/attachments/1009784232601718825/1230192043163123852/Zrzut_ekranu_2024-04-17_182341.png?ex=66326c9e&is=661ff79e&hm=0dc9f0a081eb560da6e4e04cc73c9bc29f8e16f827843beac36ad01cdf8dfe35&" alt="Chess main page">
+
 # Development plans
 - Adding English language
 - Account system
 - Automatic game creation and search
 - Ranking system
-- Chessboard and page customization
+- Chessboard, pieces and page customization
 ---
 > [!NOTE]
 > The project uses other libraries such as [chess.js](https://github.com/jhlywa/chess.js) and [chessboardjs](https://github.com/oakmac/chessboardjs/)
