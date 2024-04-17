@@ -20,6 +20,29 @@ function onDragStart(source, piece, position, orientation)
     if ((game.turn() === 'w' && piece.search(/^b/) !== -1) || (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
         return false
     }
+
+    // Get all squares from selected piece
+    for (let square of game.moves({ 'square': source }))
+    {
+        const canBeAttacked = square.includes("x")
+
+        square = square.replace(/[+#]?[!?]?\+?$/, '')
+        const pos = square.match(/[a-h][1-8]/)
+
+        const squareElement = document.querySelector("div[data-square=" + pos + "]")
+
+        if (canBeAttacked)
+        {
+            squareElement.classList.add('attack')
+        }
+        else // Legal move
+        {
+            const dot = document.createElement("div")
+            dot.classList.add("dot")
+
+            squareElement.appendChild(dot)
+        }
+    }
 }
 
 function onDrop(source, target) 
@@ -31,6 +54,19 @@ function onDrop(source, target)
     };
     // see if the move is legal
     var move = game.move(theMove);
+
+    // Remove all dots
+    const dots = document.querySelectorAll(".dot")
+    dots.forEach(dot => 
+    {
+        dot.remove()
+    })
+
+    const attack = document.querySelectorAll(".attack")
+    attack.forEach(atc =>
+    {
+        atc.classList.remove('attack')
+    })
 
 
     // illegal move

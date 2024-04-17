@@ -6,7 +6,7 @@ main
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20% 5vw;
+    padding: 1em 5vw;
     /*margin: 2vh 0;*/
 
     max-width: 2000px;
@@ -386,4 +386,12 @@ table.pgn td:first-child
 table.pgn tr:nth-child(even)
 {
     background-color: var(--secondary-color);
+}
+
+.dot
+{
+    width: 30%;
+    height: 30%;
+    border-radius: 100%;
+    background-color: var(--background-color);
 }
