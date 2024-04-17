@@ -6,7 +6,7 @@ main
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 5vw;
+    padding: 20% 5vw;
     /*margin: 2vh 0;*/
 
     max-width: 2000px;
@@ -104,6 +104,11 @@ article.black[dot]
     justify-content: space-between;
     align-items: center;
 }
+.user-info.box.vertical
+{
+    height: 20vh;
+    overflow-y: auto;
+}
 .user-info.box
 {
     border-radius: 0.5em;
@@ -111,6 +116,15 @@ article.black[dot]
 .user-info .user p
 {
     font-size: 1rem;
+}
+.user-info.pgn-moves
+{
+    height: 50%;
+    justify-content: flex-start;
+}
+.user-info.pgn-moves table
+{
+    overflow-y: auto;
 }
 
 .clock
@@ -143,11 +157,11 @@ article.black[dot]
 
 .panel
 {
-    width: 90%;
+    width: 100%;
     height: auto;
     padding: .2em 0;
     border-radius: .5em;
-    margin-bottom: 1em;
+    margin: 1em 0;
 
     display: flex;
     justify-content: center;
@@ -162,7 +176,7 @@ article.black[dot]
 .right-panel
 {
     width: auto;
-    max-width: 25vw;
+    width: 25vw;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -178,6 +192,11 @@ article.black[dot]
     align-items: center;
     border-radius: .5em;
     padding: .5em 1em;
+}
+.right-panel .user-info
+{
+    max-height: 40vh;
+    overflow-y: auto;
 }
 .right-panel .box .options
 {
@@ -219,9 +238,9 @@ article.black[dot]
 }
 .right-panel.horizontal
 {
-    height: 90vh;
-    justify-content: space-evenly;
-    padding: 2.5em 0;
+    height: 40vh;
+    justify-content: space-between;
+    padding: 2em 1em;
 }
 
 .layer.popup
@@ -238,7 +257,8 @@ article.black[dot]
 
 .searching-for-opponent .box,
 .you-win .box,
-.you-lose .box
+.you-lose .box,
+.draw .box
 {
     padding: 0.5em 1.5em 1em 1.5em;
     -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 1);
@@ -248,7 +268,8 @@ article.black[dot]
 }
 .searching-for-opponent .box h2,
 .you-win .box h2,
-.you-lose .box h2
+.you-lose .box h2,
+.draw .box h2
 {
     padding: 0.5em 0;
 }
@@ -259,7 +280,8 @@ article.black[dot]
 }
 .searching-for-opponent .box a,
 .you-win .box a,
-.you-lose .box a
+.you-lose .box a,
+.draw .box a
 {
     padding: 0.5em 1em;
     border-radius: 0.5em;
@@ -299,20 +321,23 @@ article.black[dot]
     padding: 1em 2em;
 }
 .you-win .box p,
-.you-lose .box p
+.you-lose .box p,
+.draw .box p
 {
     font-weight: 300;
     margin-bottom: 2em;
 }
 .you-win .box a,
-.you-lose .box a
+.you-lose .box a,
+.draw .box a
 {
     margin: 0.35em 0;
     width: 100%;
     text-align: center;
 }
 .you-win .box a:nth-child(3),
-.you-lose .box a:nth-child(3)
+.you-lose .box a:nth-child(3),
+.draw .box a:nth-child(3)
 {
     background-color: var(--green-color);
 }
@@ -324,10 +349,19 @@ article.black[dot]
     padding: 1em 2em;
 }
 
+.draw .box
+{
+    border: 0.5em solid;
+    border-color: var(--secondary-color);
+    padding: 1em 2em;
+}
+
 table.pgn
 {
     width: 100%;
     margin-top: 0.5em;
+    height: 100%;
+    overflow-y: auto;
 }
 table.pgn tr
 {

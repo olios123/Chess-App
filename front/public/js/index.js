@@ -22,7 +22,7 @@ function onDragStart(source, piece, position, orientation)
     }
 }
 
-function onDrop (source, target) 
+function onDrop(source, target) 
 {
     let theMove = {
         from: source,
@@ -55,33 +55,41 @@ function onSnapEnd()
     board.position(game.fen())
 }
 
-function updateStatus () 
+function updateStatus() 
 {
     var status = ''
 
     var moveColor = 'Białe'
-    if (game.turn() === 'b') {
+    if (game.turn() === 'b') 
+    {
         moveColor = 'Czarne'
     }
+    const localColor = (playerColor == "white") ? "Białe" : "Czarne"
 
     // checkmate?
     if (game.in_checkmate()) 
     {
-        displayWin("poprzez <b>mata<b>.")
+        if (localColor != moveColor) displayWin("poprzez <b>mata<b>.") 
+        else displayLose("poprzez <b>mata<b>.")
+        
         status = 'Koniec gry, ' + moveColor + ', szach mat.'
     }
 
     // draw?
-    else if (game.in_draw()) {
+    else if (game.in_draw()) 
+    {
+        displayDraw()
         status = 'Koniec gry, remis.'
     }
 
-    else if (gameOver) {
+    else if (gameOver) 
+    {
         status = 'Koniec gry, przeciwnik wyszedł!'
         displayWin("przeciwnik porzucił partię.")
     }
 
-    else if (!gameHasStarted) {
+    else if (!gameHasStarted) 
+    {
         status = 'Oczekiwanie na dołączenie przeciwnika.'
     }
 
@@ -185,21 +193,37 @@ socket.on('gameOverDisconnect', function()
 
 function displayWin(reason) 
 {
-    const winElement = '<div class="layer popup center hide"><div class="you-win center"><div class="box column"><h2>Wygrałeś!</h2><p>' + reason + '</p><a class="cancel" href="/">Powrót</a></div></div></div>'
+    const winElement = document.querySelector('layer popup center hide')
+    winElement.style.display = 'flex'
 
-    const main = document.querySelector('main')
-    main.innerHTML += winElement
+    winElement.classList.remove("hide")
 
-    const popup = main.children[main.children.length - 1]
-    popup.classList.remove("hide")
+    console.log(winElement)
+
+    // const main = document.querySelector('main')
+    // main.innerHTML += winElement
+
+    // const popup = main.children[main.children.length - 1]
+    // popup.classList.remove("hide")
 }
 
-function displayLose(reason) 
+function displayLose(reason)
 {
     const loseElement = '<div class="layer popup center hide"><div class="you-lose center"><div class="box column"><h2>Przegrałeś!</h2><p>' + reason + '</p><a class="cancel" href="/">Powrót</a></div></div></div>'
 
     const main = document.querySelector('main')
     main.innerHTML += loseElement
+
+    const popup = main.children[main.children.length - 1]
+    popup.classList.remove("hide")
+}
+
+function displayDraw() 
+{
+    const drawElement = '<div class="layer popup center hide"><div class="draw center"><div class="box column"><h2>Remis!</h2><p></p><a class="cancel" href="/">Powrót</a></div></div></div>'
+
+    const main = document.querySelector('main')
+    main.innerHTML += drawElement
 
     const popup = main.children[main.children.length - 1]
     popup.classList.remove("hide")

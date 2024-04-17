@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/public/css/pages/game.css">
 </head>
 <body>
-
     <header class="space-between">
         <a class="header-main" href="/">
             <i class="fi fi-sr-chess-bishop center"></i>
@@ -38,6 +37,39 @@
             </div>
         </div>
 
+        <!-- You win -->
+        <div class="layer popup center hide" style="display: none;">
+            <div class="you-win center">
+                <div class="box column">
+                    <h2>Wygrałeś!</h2>
+                    <p></p>
+                    <a class="cancel" href="/">Powrót</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- You lose -->
+        <div class="layer popup center hide" style="display: none;">
+            <div class="you-lose center">
+                <div class="box column">
+                    <h2>Przegrałeś!</h2>
+                    <p></p>
+                    <a class="cancel" href="/">Powrót</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Draw -->
+        <div class="layer popup center hide" style="display: none;">
+            <div class="draw center">
+                <div class="box column">
+                    <h2>Remis!</h2>
+                    <p></p>
+                    <a class="cancel" href="/">Powrót</a>
+                </div>
+            </div>
+        </div>
+
 
         <div class="user-info vertical" style="margin-top: 8%;">
             <h2>Status:</h2>
@@ -55,7 +87,13 @@
             <div id="myBoard"></div>
         </div>
 
-        <div class="user-info box vertical column" style="margin-top: 1em;">
+        <div class="panel box vertical">
+            <i class="fi fi-sr-undo"></i>
+            <i class="fi fi-sr-handshake"></i>
+            <i class="fi fi-sr-flag"></i>
+        </div>
+
+        <div class="user-info box vertical column">
             <h2>PGN:</h2>
             <table class="pgn">
                 <tr>
@@ -81,12 +119,16 @@
             <i class="fi fi-sr-flag"></i>
         </div> -->
 
-        <div class="right-panel horizontal">
-            <div class="user-info" style="margin-top: 8%;">
+        <div class="right-panel box horizontal">
+            
+            <div class="user-info">
                 <h2>Status:</h2>
                 <div class="status"></div>
             </div>
-            <div class="user-info box column" style="margin-top: 1em;">
+
+            <hr>
+
+            <div class="user-info pgn-moves column">
                 <h2>PGN:</h2>
                 <table class="pgn">
                     <tr>
@@ -95,6 +137,14 @@
                         <th>Czarne</th>
                     </tr>
                 </table>
+            </div>
+
+            <hr>
+
+            <div class="options center">
+                <i class="fi fi-sr-undo"></i>
+                <i class="fi fi-sr-handshake"></i>
+                <i class="fi fi-sr-flag"></i>
             </div>
             <!-- <div class="right-panel-user column">
                 <div class="clock" style="border-bottom: 4px solid var(--secondary-color);">
@@ -121,11 +171,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="options center">
-                    <i class="fi fi-sr-undo"></i>
-                    <i class="fi fi-sr-handshake"></i>
-                    <i class="fi fi-sr-flag"></i>
-                </div>
+                
             </div>
             <div class="right-panel-user column">
                 <div class="user center">
