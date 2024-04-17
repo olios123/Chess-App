@@ -38,10 +38,10 @@
         </div>
 
         <!-- You win -->
-        <div class="layer popup center hide" style="display: none;">
+        <div class="layer popup center" id="win" style="display: none; opacity: 0;">
             <div class="you-win center">
                 <div class="box column">
-                    <h2>Wygrałeś!</h2>
+                    <h2>Wygrałeś</h2>
                     <p></p>
                     <a class="cancel" href="/">Powrót</a>
                 </div>
@@ -49,10 +49,10 @@
         </div>
 
         <!-- You lose -->
-        <div class="layer popup center hide" style="display: none;">
+        <div class="layer popup center" id="lose" style="display: none; opacity: 0;">
             <div class="you-lose center">
                 <div class="box column">
-                    <h2>Przegrałeś!</h2>
+                    <h2>Przegrałeś</h2>
                     <p></p>
                     <a class="cancel" href="/">Powrót</a>
                 </div>
@@ -60,10 +60,10 @@
         </div>
 
         <!-- Draw -->
-        <div class="layer popup center hide" style="display: none;">
+        <div class="layer popup center" id="draw" style="display: none; opacity: 0;">
             <div class="draw center">
                 <div class="box column">
-                    <h2>Remis!</h2>
+                    <h2>Remis</h2>
                     <p></p>
                     <a class="cancel" href="/">Powrót</a>
                 </div>
@@ -73,7 +73,7 @@
 
         <div class="user-info vertical" style="margin-top: 8%;">
             <h2>Status:</h2>
-            <div class="status"></div>
+            <div class="status" style="text-align: center;"></div>
         </div>
         <!-- <div class="user-info vertical" style="margin-top: 1em;">
             <div class="user">
@@ -84,7 +84,7 @@
             </div>
         </div> -->
         <div class="board">
-            <div id="myBoard"></div>
+            <div id="myBoard" style="width: 100%;"></div>
         </div>
 
         <div class="panel box vertical">
@@ -123,7 +123,7 @@
             
             <div class="user-info">
                 <h2>Status:</h2>
-                <div class="status"></div>
+                <div class="status" style="text-align: center;"></div>
             </div>
 
             <hr>

@@ -214,6 +214,7 @@
     {
         width: auto;
         height: 100%;
+        max-width: 60vw;
         margin-right: 5vw;
     }
 

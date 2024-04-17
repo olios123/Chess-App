@@ -96,7 +96,7 @@ function updateStatus()
     // game still on
     else 
     {
-        status = 'Ruch ' + (moveColor == "Białe") ? 'białych' : 'czarnych'
+        status = 'Ruch ' + ((moveColor == "Białe") ? 'białych' : 'czarnych')
 
         // check?
         if (game.in_check()) 
@@ -152,6 +152,7 @@ var config = {
     pieceTheme: '/public/img/chesspieces/wikipedia/{piece}.png'
 }
 board = Chessboard('myBoard', config)
+$(window).resize(board.resize)
 if (playerColor == 'black') 
 {
     board.flip();
@@ -193,38 +194,21 @@ socket.on('gameOverDisconnect', function()
 
 function displayWin(reason) 
 {
-    const winElement = document.querySelector('layer popup center hide')
-    winElement.style.display = 'flex'
+    const win = document.getElementById('win')
+    win.children[0].children[0].children[1].innerHTML = reason
 
-    winElement.classList.remove("hide")
-
-    console.log(winElement)
-
-    // const main = document.querySelector('main')
-    // main.innerHTML += winElement
-
-    // const popup = main.children[main.children.length - 1]
-    // popup.classList.remove("hide")
+    $('#win').fadeTo(100, 1);
 }
 
 function displayLose(reason)
 {
-    const loseElement = '<div class="layer popup center hide"><div class="you-lose center"><div class="box column"><h2>Przegrałeś!</h2><p>' + reason + '</p><a class="cancel" href="/">Powrót</a></div></div></div>'
+    const lose = document.getElementById('lose')
+    lose.children[0].children[0].children[1].innerHTML = reason
 
-    const main = document.querySelector('main')
-    main.innerHTML += loseElement
-
-    const popup = main.children[main.children.length - 1]
-    popup.classList.remove("hide")
+    $('#lose').fadeTo(100, 1);
 }
 
 function displayDraw() 
 {
-    const drawElement = '<div class="layer popup center hide"><div class="draw center"><div class="box column"><h2>Remis!</h2><p></p><a class="cancel" href="/">Powrót</a></div></div></div>'
-
-    const main = document.querySelector('main')
-    main.innerHTML += drawElement
-
-    const popup = main.children[main.children.length - 1]
-    popup.classList.remove("hide")
+    $('#draw').fadeTo(100, 1);
 }

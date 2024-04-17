@@ -193,9 +193,10 @@ article.black[dot]
     border-radius: .5em;
     padding: .5em 1em;
 }
-.right-panel .user-info
+.right-panel .user-info.pgn-moves.column
 {
     max-height: 40vh;
+    min-height: 3em;
     overflow-y: auto;
 }
 .right-panel .box .options
