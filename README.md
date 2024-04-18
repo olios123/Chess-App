@@ -2,7 +2,8 @@
 Chess App is a simple chess application that uses other libraries and combines everything into one whole. The website is based on a socket-based client-server system.
 
 ## Requirements
-- NodeJS (base version v20.12.1)
+- NodeJS v20.12.1
+- jQuery 3.7.0
 
 ## Instalation
 
