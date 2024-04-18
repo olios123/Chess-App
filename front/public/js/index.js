@@ -62,6 +62,7 @@ function onDrop(source, target)
         dot.remove()
     })
 
+    // Remove all attacks
     const attack = document.querySelectorAll(".attack")
     attack.forEach(atc =>
     {
@@ -90,6 +91,14 @@ socket.on('newMove', function(move)
 {
     game.move(move);
     board.position(game.fen());
+
+    // Remove check king
+    const checks = document.querySelectorAll('.check')
+    checks.forEach(ch =>
+    {
+        ch.classList.remove('check')
+    })
+
     updateStatus();
 });
 
@@ -224,6 +233,10 @@ function updateStatus()
         if (game.in_check()) 
         {
             status += ', ' + moveColor + ' szach.'
+
+            // Display check on king
+            const getCheckedKing = document.querySelector('img[data-piece=' + game.turn() + 'K]')
+            getCheckedKing.parentElement.classList.add('check')
         }
         else status += "."
     }
