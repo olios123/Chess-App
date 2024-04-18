@@ -27,7 +27,19 @@ function onDragStart(source, piece, position, orientation)
         const canBeAttacked = square.includes("x")
 
         square = square.replace(/[+#]?[!?]?\+?$/, '')
-        const pos = square.match(/[a-h][1-8]/)
+        let pos = square.match(/[a-h][1-8]/)
+
+        // Castling
+        if (square == 'O-O') // Short
+        {
+            if (playerColor === 'black') pos = 'g8'
+            else if (playerColor == 'white') pos = 'g1'
+        }
+        else if (square == "O-O-O") // Long
+        {
+            if (playerColor === 'black') pos = 'c8'
+            else if (playerColor == 'white') pos = 'c1'
+        }
 
         const squareElement = document.querySelector("div[data-square=" + pos + "]")
 
@@ -39,10 +51,11 @@ function onDragStart(source, piece, position, orientation)
         {
             const dot = document.createElement("div")
             dot.classList.add("dot")
-
+            
             squareElement.appendChild(dot)
         }
     }
+    console.log("======================")
 }
 
 function onDrop(source, target) 
