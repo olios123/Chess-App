@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.3s ease-in-out all;
+    transition: 0.1s ease-in-out all;
     font-size: 20%;
 }
 .square-55d63.attack
@@ -29,6 +29,10 @@
     -webkit-box-shadow: inset 0px 0px 0px 1em var(--red-color);
     -moz-box-shadow: inset 0px 0px 0px 1em var(--red-color);
     box-shadow: inset 0px 0px 0px 1em var(--red-color);
+}
+.square-55d63.check
+{
+    background-color: var(--red-color);
 }
 .white-1e1d7 
 {

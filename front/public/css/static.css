@@ -51,3 +51,12 @@
 {
 	background-color: #e35454;
 }
+
+.green
+{
+	background-color: var(--green-color);
+}
+.green:hover
+{
+	background-color: #90b883;
+}

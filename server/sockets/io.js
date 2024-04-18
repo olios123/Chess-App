@@ -11,23 +11,43 @@ module.exports = io => {
             io.to(currentCode).emit('newMove', move);
         });
 
-        // Draw
+        // --- Draw ---
         socket.on('drawRequest', function(color) 
         {
             io.to(currentCode).emit('opponentDrawRequest', color)
         })
+        socket.on('acceptDrawRequest', function(color)
+        {
+            io.to(currentCode).emit('opponentDrawRequestAccepted', color)
+            currentCode = null
+        })
+        socket.on('rejectDrawRequest', function(color)
+        {
+            io.to(currentCode).emit('opponentDrawRequestRejected', color)
+        })
 
-        // Move back
+
+
+        // --- Undo ---
         socket.on('undoRequest', function(color)
         {
             io.to(currentCode).emit('opponentUndoRequest', color)
         })
+        socket.on('acceptUndoRequest', function(color)
+        {
+            io.to(currentCode).emit('opponentUndoRequestAccepted', color)
+        })
+        socket.on('rejectUndoRequest', function(color)
+        {
+            io.to(currentCode).emit('opponentUndoRequestRejected', color)
+        })
+
 
         // Give up
         socket.on('surrender', function(color) 
         {
             io.to(currentCode).emit('opponentSurrendered', color)
-            handleDisconnecting = false
+            currentCode == null
         })
         
         // Joining to game

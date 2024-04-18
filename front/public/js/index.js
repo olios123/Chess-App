@@ -74,6 +74,15 @@ function onDrop(source, target)
 
     socket.emit('move', theMove);
 
+    // If player moved piece reject all requests
+    const message = document.querySelector(".message")
+    $('.message').animate({ height: '0px' }, 100)
+    message.innerHTML = ""
+
+    socket.emit('rejectDrawRequest', playerColor)
+    socket.emit('rejectUndoRequest', playerColor)
+
+
     updateStatus()
 }
 
@@ -92,16 +101,72 @@ socket.on('opponentSurrendered', (color) =>
 
 socket.on('opponentDrawRequest', (color) =>
 {
-    const messages = document.querySelectorAll(".message")
+    const message = document.querySelector(".message")
 
     if (color != playerColor)
     {
-        messages.forEach(msg =>
+        message.innerHTML = "<button class='green' action='acceptDraw'>Akceptuj</button><h3>Przeciwnik proponuje remis</h3><button class='cancel' action='rejectDraw'>Odrzuć</button>"
+        $('.message').animate({ height: '8vh' }, 100)
+
+        // Accept draw
+        document.querySelector('button[action=acceptDraw]').addEventListener('click', () =>
         {
-            msg.innerHTML = "<h4>Przeciwnik proponuje remis</h4>"
+            socket.emit('acceptDrawRequest')
+        })
+
+        // Reject draw
+        document.querySelector('button[action=rejectDraw]').addEventListener('click', () =>
+        {
+            socket.emit('rejectDrawRequest')
         })
     }
-    
+})
+socket.on('opponentDrawRequestAccepted', () => // Draw accepted
+{
+    displayDraw()
+    $('.message').animate({ height: '0px' }, 100)
+    message.innerHTML = "" 
+})
+socket.on('opponentDrawRequestRejected', () => // Draw rejected
+{
+    $('.message').animate({ height: '0px' }, 100)
+    message.innerHTML = ""
+})
+
+
+
+socket.on('opponentUndoRequest', (color) =>
+{
+    const message = document.querySelector(".message")
+
+    if (color != playerColor)
+    {
+        message.innerHTML = "<button class='green' action='acceptUndo'>Akceptuj</button><h3>Przeciwnik prosi o cofnięcie ruchu</h3><button class='cancel' action='rejectUndo'>Odrzuć</button>"
+        $('.message').animate({ height: '8vh' }, 100)
+
+        // Accept undo
+        document.querySelector('button[action=acceptUndo]').addEventListener('click', () =>
+        {
+            socket.emit('acceptUndoRequest', playerColor)
+        })
+
+        // Reject draw
+        document.querySelector('button[action=rejectUndo]').addEventListener('click', () =>
+        {
+            socket.emit('rejectUndoRequest', playerColor)
+        })
+    }
+})
+socket.on('opponentUndoRequestAccepted', (color) => // Undo accepted
+{
+    $('.message').animate({ height: '0px' }, 100)
+    message.innerHTML = "" 
+    game.undo()
+})
+socket.on('opponentUndoRequestRejected', () => // Undo rejected
+{
+    $('.message').animate({ height: '0px' }, 100)
+    message.innerHTML = ""
 })
 
 
@@ -270,6 +335,7 @@ function displayDraw()
     $('#draw').fadeTo(100, 1);
 }
 
+const message = document.querySelector('.message')
 // Controll buttons
 const undo = document.querySelectorAll('i[action=undo]')
 const draw = document.querySelectorAll('i[action=draw]')
@@ -280,6 +346,16 @@ undo.forEach(el =>
     el.addEventListener('click', () =>
     {
         socket.emit('undoRequest', playerColor)
+
+        message.innerHTML = "<h3>Wysłano prośbę o cofnięcie ruchu. Oczekiwanie na odpowiedź...</h3><button class='cancel' action='cancelUndoRequest'>Anuluj</button>"
+        $('.message').animate({ height: '8vh' }, 100)
+
+        document.querySelector('button[action=cancelUndoRequest]').addEventListener('click', () =>
+        {
+            message.innerHTML = ""
+            $('.message').animate({ height: '0px' }, 100)
+            socket.emit('rejectUndoRequest')
+        })
     })
 })
 
@@ -289,11 +365,16 @@ draw.forEach(el =>
     {
         socket.emit('drawRequest', playerColor)
 
-        const messages = document.querySelectorAll(".message")
-        messages.forEach(msg =>
+        message.innerHTML = "<h3>Wysłano propozycję remisu. Oczekiwanie na odpowiedź...</h3><button class='cancel' action='cancelDrawRequest'>Anuluj</button>"
+        $('.message').animate({ height: '8vh' }, 100)
+        
+        document.querySelector('button[action=cancelDrawRequest]').addEventListener('click', () =>
         {
-            msg.innerHTML = "<h4>Wysłano propozycję remisu...</h4>"
+            message.innerHTML = ""
+            $('.message').animate({ height: '0px' }, 100)
+            socket.emit('rejectDrawRequest')
         })
+
     })
 })
 

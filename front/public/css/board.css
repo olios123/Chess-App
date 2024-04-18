@@ -400,8 +400,13 @@ table.pgn tr:nth-child(even)
 .message
 {
     width: 100%;
-    height: auto;
-    padding: 0.5em 0;
+    padding: 0.5em 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow-y: hidden;
+    backdrop-filter: blur(6px);
 }
 
 .message:empty
