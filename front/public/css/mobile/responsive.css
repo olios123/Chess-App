@@ -227,3 +227,19 @@
         width: 100vw;
     }
 }
+
+@media (orientation: portrait) 
+{
+    .message
+    {
+        padding: 0.5em;
+    }
+    .message h3
+    {
+        font-size: 2.5vw;
+    }
+    .message button
+    {
+        padding: 0.5em;
+    }
+}
