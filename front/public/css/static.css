@@ -54,9 +54,10 @@
 
 .green
 {
-	background-color: var(--green-color);
+	background-color: var(--green-color) !important;
+	transition: 0.3s ease-in-out background-color;
 }
 .green:hover
 {
-	background-color: #90b883;
+	background-color: #90b883 !important;
 }

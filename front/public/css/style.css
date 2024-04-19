@@ -97,7 +97,8 @@ a
     text-decoration: none;
 }
 
-button
+button,
+.button
 {
     padding: 1em;
     border-radius: .5em;
@@ -106,7 +107,8 @@ button
     transition: .3s ease-in-out background-color;
     cursor: pointer;
 }
-button:hover
+button:hover,
+.button
 {
     background-color: var(--hover-color);
 }
@@ -228,4 +230,77 @@ input:focus
 .light
 {
     font-weight: 500;
+}
+
+/* Account */
+.account
+{
+    padding: 0.5em;
+    width: 80%;
+    border: 2px solid var(--secondary-color);
+    display: flex;
+    position: relative;
+    margin: 2em 0;
+}
+.account .avatar
+{
+    width: 30%;
+    height: 100%;
+}
+.account .avatar img
+{
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    border-radius: 0.5em;
+}
+.account .account-info
+{
+    width: 60%;
+    padding-left: 2em;
+    align-items: flex-start;
+}
+.account .account-details
+{
+    justify-content: flex-start;
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid var(--secondary-color);
+}
+.account .account-details h2
+{
+    font-size: 2em;
+    margin-right: 0.25em;
+}
+.account .ranking-info
+{
+    width: 100%;
+    height: 50%;
+    justify-content: flex-start;
+    align-items: center;
+}
+.account .ranking-info i
+{
+    margin: 0 0.5em 0 0;
+    padding: 0;
+}
+.account .logout
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.account .logout i
+{
+    font-size: 1.25em;
+    padding: 0.5em;
+    margin: 0;
+    transition: 0.3s ease-in-out color;
+}
+.account .logout i:hover
+{
+    color: var(--red-color);
+}
+.account a.green.button
+{
+    padding: 0.8em;
 }

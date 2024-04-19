@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
-    {{> head}}
+    <%- include('./partials/head') %>
 
     <link rel="stylesheet" href="/public/css/pages/game.css">
 </head>
@@ -14,16 +11,7 @@
 
     <div class="message space-between text-center"></div>
 
-    <header class="space-between">
-        <a class="header-main" href="/">
-            <i class="fi fi-sr-chess-bishop center"></i>
-            <h1>Chess</h1>
-        </a>
-        <a href="/">
-            <i class="fi fi-sr-leave center"></i>
-        </a>
-        
-    </header>
+    <%- include('./partials/header') %>
 
     <main>
 

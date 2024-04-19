@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+    <%- include('./partials/head') %>
+
+    <link rel="stylesheet" href="/public/css/pages/index.css">
+    
+</head>
+<body>
+
+    <div class="background">
+        
+    </div>
+
+    <%- include('./partials/header') %>
+
+    <main>
+        <div class="board-main center">
+            <img src="/public/assets/gif/game1.gif" alt="">
+        </div>
+        <div class="game-main column center">
+            <h1 class="title">Najlepsze szachy internetowe!</h1>
+
+            <div class="main-content">
+                <% 
+                    if (!sessionData.authenticated)
+                    { %>
+                        <div class="account box center column">
+                            <h2>Nie jesteś zalogowany</h2>
+                            <p class="text-center" style="margin-bottom: 1em; font-weight: normal;">Utwórz  konto aby zapisywać swoje postępy!</p>
+                            <a class="green button" href="/login">Zaloguj się</a>
+                        </div>
+                    <% }
+                    else
+                    { %>
+                        <div class="account box">
+                            <div class="avatar center">
+                                <img src="<%= sessionData.user.avatar %>" alt="User avatar">
+                            </div>
+                            <div class="account-info column">
+                                <div class="account-details row">
+                                    <h2 class="center"><%= sessionData.user.username %></h2>
+                                </div>
+                            
+                                <div class="ranking-info row">
+                                    <i class="fi fi-sr-trophy-star"></i>
+                                    <p class="center"><%= sessionData.user.ranking %></p>
+                                </div>
+                            </div>
+                            <a class="logout" href="/logout">
+                                <i class="fi fi-sr-sign-out-alt"></i>
+                            </a>
+                        </div>
+
+                    <% }
+                %>
+                    
+                <a class="find-game column center green">
+                    <img src="/public/assets/pieces/png/White-King.png">
+
+                    <h2 class="text-center">Znajdź przeciwnika</h2>
+                    <p class="text-center">Graj z przeciwnikami z całego świata!</p>
+                </a>
+
+                <script>
+                    $('.find-game').height($('.account').height())
+
+                    $(window).resize(function() {
+                        $('.find-game').height($('.account').height())
+                    })
+                </script>
+            </div>
+            
+            
+
+
+
+            <!-- 
+            <div class="find-game row center" style="margin: 1em 0;">
+                <div class="column">
+
+                    <h2>Stwórz pokój</h2>
+                    <div class="center">
+                        <i class="fi fi-sr-dice-alt"></i>
+                    </div>
+                    
+                    <p>Kod pokoju:</p>
+                    <input type="text" id="createInput">
+                    
+                    <button id="createGame">Stwórz pokój</button>
+                
+                </div>
+                <div class="column">
+                    <h2 class="center">LUB</h2>
+                </div>
+                <div class="column">
+
+                    <h2>Dołącz do pokoju</h2>
+                    <div class="center">
+                        <i class="fi fi-br-search"></i>
+                    </div>
+
+                    <p>Kod pokoju:</p>
+                    <input type="text" id="joinInput">
+                        
+                    <button id="joinGame">Dołącz do gry</button>
+
+                </div>
+            </div> -->
+            <div class="text-center" style="color: red; margin-bottom: 1em;" id="errorMessage"></div>
+        </div>
+        
+    </main>
+
+    <script>
+        $('#createGame').on('click', function() {
+            window.location.replace('/white?code=' + $('#createInput').val());
+        });
+        $('#joinGame').on('click', function() {
+            window.location.replace('/black?code=' + $('#joinInput').val());
+        });
+
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') == 'invalidCode') {
+            $('#errorMessage').text('Nieprawidłowy kod. Stwórz pokój lub podaj prawidłowy kod.');
+        }
+    </script>
+</body>
+</html>

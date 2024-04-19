@@ -34,6 +34,15 @@ body
     {
         font-size: 3em !important;
     }
+
+    .find-game h2
+    {
+        font-size: 6vw;
+    }
+    .find-game p
+    {
+        font-size: 3vw;
+    }
 }
 
 @media screen and (max-width: 500px) 
@@ -47,7 +56,7 @@ body
     {
         font-size: 3em !important;
     }
-    a.find-game
+    /* a.find-game
     {
         padding: 1.5em !important;
     }
@@ -59,15 +68,7 @@ body
     a.find-game .find-game-info h2
     {
         font-size: 1.8em;
-    }
-}
-
-@media screen and (min-width: 600px) 
-{
-    .find-game .column:nth-child(2)
-    {
-        margin: 0 2em !important;
-    }
+    } */
 }
 
 @media screen and (min-width: 1500px) 
@@ -81,6 +82,16 @@ body
     {
         font-size: 4em !important;
     }
+
+    .find-game h2
+    {
+        font-size: 2vw !important;
+    }
+    .find-game p
+    {
+        font-size: 1vw !important;
+    }
+
 }
 
 @media screen and (max-width: 1400px)
@@ -109,6 +120,26 @@ body
     {
         width: 100% !important;
         height: 100%;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1400px)  
+{
+    .main-content
+    {
+        flex-direction: row !important;
+    }
+    .account
+    {
+        margin: 2em;
+    }
+    .find-game h2
+    {
+        font-size: 4vw !important;
+    }
+    .find-game p
+    {
+        font-size: 2vw !important;
     }
 }
 
@@ -257,13 +288,12 @@ h1.title
 {
     font-size: 4.5vw;
     text-align: center;
-    margin-bottom: 0.5em;
 }
 .statistic p:first-child
 {
     margin-right: 2em;
 }
-a.find-game
+/* a.find-game
 {
     padding: 3em;
     margin-bottom: 1em;
@@ -295,7 +325,7 @@ a.find-game i
 a.find-game p
 {
     font-size: 1.25em;
-}
+} */
 
 .board-main
 {
@@ -310,14 +340,12 @@ a.find-game p
     aspect-ratio: 1 / 1;
 }
 
-.find-game
+/* .find-game
 {
     border-radius: 1em;
-    /* display: table; */
 }
 .find-game .column
 {
-    /* display: table-cell; */
     height: 100%;
     justify-content: center;
     flex-direction: column;
@@ -365,7 +393,7 @@ a.find-game p
 .find-game .column i
 {
     font-size: 3em;
-}
+} */
 
 div#errorMessage
 {
@@ -376,4 +404,41 @@ div#errorMessage
 div#errorMessage:empty
 {
     padding: 0;
+}
+
+.find-game
+{
+    width: 80%;
+    height: auto;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    overflow: hidden;
+    position: relative;
+}
+.find-game img
+{
+    position: absolute;
+    left: -10%;
+    top: 0;
+    width: 50%;
+    height: auto;
+    opacity: 0.05;
+}
+.find-game h2
+{
+    font-size: 6vw;
+}
+.find-game p
+{
+    font-size: 3vw;
+}
+
+.main-content
+{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

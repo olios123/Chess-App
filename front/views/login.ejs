@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+    <%- include('./partials/head') %>
+
+</head>
+<body>
+
+    <main>
+        <form action="/accountLogin" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="username">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Utwórz konto">
+        </form>
+    </main>
+</body>
+</html>
