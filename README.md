@@ -17,7 +17,14 @@ Run this command in the console to install the modules necessary for the applica
 The `server/config.js` file contains the application configuration.
 ```javascript
 module.exports = {
-  port: 3750
+    port: 3750,
+    database: {
+        host: 'HOST',
+        port: 3306,
+        user: 'USER',
+        password: 'PASSWORD',
+        database: 'DATABASE'
+    }
 }
 ```
 The standard application port is **3750**, you can change it to one that is not currently occupied.
