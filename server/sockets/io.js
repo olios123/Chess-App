@@ -5,7 +5,7 @@ module.exports = io => {
     io.on('connection', socket => {
         console.log('New socket connection');
 
-        let currentCode = null;
+        let currentCode = null
         let handleDisconnecting = true
 
         // Handle moves
@@ -51,7 +51,7 @@ module.exports = io => {
         socket.on('surrender', function(color) 
         {
             io.to(currentCode).emit('opponentSurrendered', color)
-            currentCode == null
+            currentCode = null
             handleDisconnecting = false
         })
         
@@ -80,11 +80,12 @@ module.exports = io => {
         // Disconnecting
         socket.on('disconnect', function() 
         {
+            console.log(currentCode, handleDisconnecting)
             if (currentCode && handleDisconnecting) 
             {
                 io.to(currentCode).emit('gameOverDisconnect')
-                delete games[currentCode]
             }
+            delete games[currentCode]
         })
 
         // End

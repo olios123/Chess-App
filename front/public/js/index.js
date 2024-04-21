@@ -3,7 +3,7 @@ let board = null
 let game = new Chess()
 let stat = document.querySelectorAll('.status')
 let pgn = document.querySelectorAll('.pgn')
-let gameOver = false;
+let gameOver = false
 
 let selectedPiece = null
 
@@ -505,6 +505,8 @@ socket.on('gameOverDisconnect', function()
 
 function displayWin(reason) 
 {
+    if (gameOver) return
+
     const win = document.getElementById('win')
     win.children[0].children[0].children[1].innerHTML = reason
 
@@ -515,6 +517,8 @@ function displayWin(reason)
 
 function displayLose(reason)
 {
+    if (gameOver) return
+
     const lose = document.getElementById('lose')
     lose.children[0].children[0].children[1].innerHTML = reason
 
@@ -523,6 +527,8 @@ function displayLose(reason)
 
 function displayDraw() 
 {
+    if (gameOver) return
+
     $('#draw').fadeTo(100, 1);
 }
 
