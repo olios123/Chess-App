@@ -293,39 +293,6 @@ h1.title
 {
     margin-right: 2em;
 }
-/* a.find-game
-{
-    padding: 3em;
-    margin-bottom: 1em;
-    border-radius: 1em;
-    background-color: var(--green-color);
-}
-a.find-game:hover
-{
-    background-color: rgb(153, 199, 137);
-}
-a.find-game div.find-game-info
-{
-    height: 6em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-a.find-game div h2
-{
-    font-size: 2.5em;
-}
-a.find-game i
-{
-    font-size: 6em;
-    margin: 0 0.3em 0 0;
-    padding: 0;
-}
-a.find-game p
-{
-    font-size: 1.25em;
-} */
 
 .board-main
 {
@@ -340,61 +307,6 @@ a.find-game p
     aspect-ratio: 1 / 1;
 }
 
-/* .find-game
-{
-    border-radius: 1em;
-}
-.find-game .column
-{
-    height: 100%;
-    justify-content: center;
-    flex-direction: column;
-    flex: 1;
-}
-.find-game .column > * 
-{
-    flex: 1;
-}
-.find-game .column:nth-child(2)
-{
-    flex: 0;
-    margin: 0 0.5em;
-}
-.find-game .column:nth-child(3) > *
-{
-    flex-grow: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-.find-game .column input
-{
-    flex: 0;
-}
-.find-game input
-{
-    padding: 0.5em 1em;
-    font-size: 1em;
-    margin: 0.5em 0 1em 0;
-    text-align: center;
-    width: 90%;
-    background-color: var(--primary-color);
-    border: 2px solid var(--secondary-color);
-    color: var(--accent-color);
-}
-.find-game button
-{
-    border: 2px solid var(--secondary-color);
-}
-.find-game h2
-{
-    text-align: center;
-}
-.find-game .column i
-{
-    font-size: 3em;
-} */
-
 div#errorMessage
 {
     padding: 0.8em;
@@ -406,12 +318,16 @@ div#errorMessage:empty
     padding: 0;
 }
 
-.find-game
+.f-game
 {
     width: 80%;
+}
+.find-game
+{
+    width: 100%;
     height: auto;
     border-radius: 0.5em;
-    padding: 0.5em;
+    padding: 2em 0.5em;
     overflow: hidden;
     position: relative;
 }
@@ -423,14 +339,6 @@ div#errorMessage:empty
     width: 50%;
     height: auto;
     opacity: 0.05;
-}
-.find-game h2
-{
-    font-size: 6vw;
-}
-.find-game p
-{
-    font-size: 3vw;
 }
 
 .main-content

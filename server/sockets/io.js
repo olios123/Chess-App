@@ -1,3 +1,6 @@
+const util = require('util')
+const { connection } = require('./../database/mysql')
+
 module.exports = io => {
     io.on('connection', socket => {
         console.log('New socket connection');
@@ -20,6 +23,7 @@ module.exports = io => {
         {
             io.to(currentCode).emit('opponentDrawRequestAccepted', color)
             currentCode = null
+            handleDisconnecting = false
         })
         socket.on('rejectDrawRequest', function(color)
         {
@@ -48,20 +52,29 @@ module.exports = io => {
         {
             io.to(currentCode).emit('opponentSurrendered', color)
             currentCode == null
+            handleDisconnecting = false
         })
         
         // Joining to game
         socket.on('joinGame', function(data) 
         {
-
-            currentCode = data.code;
-            socket.join(currentCode);
-            if (!games[currentCode]) {
-                games[currentCode] = true;
-                return;
+            currentCode = data.code
+            socket.join(currentCode)
+            if (!games[currentCode]) 
+            {
+                games[currentCode] = {
+                    join: true,
+                    players: [{ user: data.user, color: data.color }]
+                }
+                return
             }
+
+            // console.log(util.inspect(games, {showHidden: false, depth: null, colors: true}))
+
+            games[currentCode].join = false
+            games[currentCode].players.push({ user: data.user, color: data.color })
             
-            io.to(currentCode).emit('startGame');
+            io.to(currentCode).emit('startGame', { gameData: games[currentCode] });
         });
 
         // Disconnecting
@@ -69,10 +82,45 @@ module.exports = io => {
         {
             if (currentCode && handleDisconnecting) 
             {
-                io.to(currentCode).emit('gameOverDisconnect');
-                delete games[currentCode];
+                io.to(currentCode).emit('gameOverDisconnect')
+                delete games[currentCode]
             }
-        });
+        })
+
+        // End
+        socket.on('endGame', function(data)
+        {
+            if (!games[currentCode]) return
+
+            const winPlayer = games[data.code].players.find(x => x.color == data.win)
+            const losePlayer = games[data.code].players.find(x => x.color != data.win)
+
+            function updateRanking(player, amount)
+            {
+                // Update data in database
+                if (player != null && player.user != null && player.user.username != '')
+                {
+                    connection.query('SELECT `ranking` FROM `users` WHERE `username`=?', 
+                    [player.user.username],
+                    function(err, results)
+                    {
+                        if (err) return
+
+                        connection.query('UPDATE `users` SET `ranking`=? WHERE `username`=?', 
+                        [parseInt(results[0].ranking) + amount, player.user.username],
+                        function(err, results)
+                        {
+                            if (err) return
+                        })
+                    })
+                }
+            }
+
+            updateRanking(winPlayer, 6)
+            updateRanking(losePlayer, -6)
+
+            delete games[currentCode]
+        })
 
     });
 };

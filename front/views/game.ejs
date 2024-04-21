@@ -5,6 +5,20 @@
     <%- include('./partials/head') %>
 
     <link rel="stylesheet" href="/public/css/pages/game.css">
+
+    <script>
+        let gameData = {
+            color: '<%= data.color %>',
+            code: '<%= data.code %>'
+        }
+        let user = {
+            username: '<%= data.user.username %>',
+            avatar: '<%= data.user.avatar %>',
+            ranking: '<%= data.user.ranking %>'
+        }
+        let playerColor = gameData.color
+    </script>
+
 </head>
 <body>
 
@@ -35,6 +49,23 @@
                 <div class="box column">
                     <h2>Wygrałeś</h2>
                     <p class="text-center"></p>
+                    <div class="center column" style="margin: 1em 0;">
+                        <div class="center" class="profiles">
+                            <div class="column center" style="padding: 0 0.5em;">
+                                <img style="border: 6px solid var(--green-color);">
+                                <h4></h4>
+                                <p class="text-center"></p>
+                            </div>
+                            
+                            <h3 style="margin: 0 1vw;">VS</h3>
+    
+                            <div class="column center" style="padding: 0 0.5em;">
+                                <img style="border: 6px solid var(--red-color);">
+                                <h4></h4>
+                                <p class="text-center"></p>
+                            </div>
+                        </div>
+                    </div>
                     <a class="cancel" href="/">Powrót</a>
                 </div>
             </div>
@@ -46,6 +77,23 @@
                 <div class="box column">
                     <h2>Przegrałeś</h2>
                     <p class="text-center"></p>
+                    <div class="center column" style="margin: 1em 0;">
+                        <div class="center" class="profiles">
+                            <div class="column center" style="padding: 0 0.5em;">
+                                <img style="border: 6px solid var(--red-color);">
+                                <h4></h4>
+                                <p class="text-center"></p>
+                            </div>
+                            
+                            <h3 style="margin: 0 1vw;">VS</h3>
+    
+                            <div class="column center" style="padding: 0 0.5em;">
+                                <img style="border: 6px solid var(--green-color);">
+                                <h4></h4>
+                                <p class="text-center"></p>
+                            </div>
+                        </div>
+                    </div>
                     <a class="cancel" href="/">Powrót</a>
                 </div>
             </div>
@@ -57,28 +105,69 @@
                 <div class="box column">
                     <h2>Remis</h2>
                     <p class="text-center"></p>
+                    <div class="center column" style="margin: 1em 0;">
+                        <div class="center" class="profiles">
+                            <div class="column center" style="padding: 0 0.5em;">
+                                <img style="border: 6px solid var(--secondary-color);">
+                                <h4></h4>
+                                <p class="text-center"></p>
+                            </div>
+                            
+                            <h3 style="margin: 0 1vw;">VS</h3>
+    
+                            <div class="column center" style="padding: 0 0.5em;">
+                                <img style="border: 6px solid var(--secondary-color);">
+                                <h4></h4>
+                                <p class="text-center"></p>
+                            </div>
+                        </div>
+                    </div>
                     <a class="cancel" href="/">Powrót</a>
                 </div>
             </div>
         </div>
 
 
-        <div class="user-info vertical" style="margin-top: 8%;">
-            <h2>Status:</h2>
-            <div class="status" style="text-align: center;"></div>
+        <div class="profile row vertical" style="margin-bottom: 0.5em;" player="player2">
+            <div class="avatar">
+                <img>
+            </div>
+            <h2 class="center" style="margin-left: 0.5em;">-</h2>
+            <div class="row ranking">
+                <i class="fi fi-sr-trophy-star"></i>
+                <p>-</p>
+            </div>
         </div>
 
         <div class="board">
             <div id="myBoard" style="width: 100%;"></div>
         </div>
 
+        <div class="profile row vertical" style="margin-top: 0.5em;" player="player1">
+            <div class="avatar">
+                <img>
+            </div>
+            <h2 class="center" style="margin-left: 0.5em;">-</h2>
+            <div class="row ranking">
+                <i class="fi fi-sr-trophy-star"></i>
+                <p>-</p>
+            </div>
+        </div>
+
         <div class="panel box vertical column">
             <div class="center">
-                <i class="fi fi-sr-undo" action="undo"></i>
+                <!-- <i class="fi fi-sr-undo" action="undo"></i> -->
                 <i class="fi fi-sr-handshake" action="draw"></i>
                 <i class="fi fi-sr-flag" action="surrender"></i>
             </div>
         </div>
+
+        <script>
+            $('.profile.row.vertical').height($('.panel.box.vertical.column').height())
+            $(window).resize(function(){
+                $('.profile.row.vertical').height($('.panel.box.vertical.column').height())
+            })    
+        </script>
 
         <div class="user-info box vertical column">
             <h2>PGN:</h2>
@@ -91,41 +180,65 @@
             </table>
         </div>
 
-        <div class="right-panel box horizontal">
+        <div class="center" style="width: 100%; height: 100%;">
+            <div class="right-panel horizontal column">
             
-            <div class="user-info column">
-                <h2 style="margin-bottom: .5em;">Status:</h2>
-                <div class="status" style="text-align: center;"></div>
-            </div>
-
-            <hr>
-
-            <div class="user-info pgn-moves column">
-                <h2>PGN:</h2>
-                <table class="pgn">
-                    <tr>
-                        <th></th>
-                        <th>Białe</th>
-                        <th>Czarne</th>
-                    </tr>
-                </table>
-            </div>
-
-            <hr>
-
-            <div class="options center" style="margin-top: 0.5em;">
-                <i class="fi fi-sr-undo" action="undo"></i>
-                <i class="fi fi-sr-handshake" action="draw"></i>
-                <i class="fi fi-sr-flag" action="surrender"></i>
+                <div class="profile row box horizontal" style="margin-bottom: 0.5em;" player="player2">
+                    <div class="avatar">
+                        <img>
+                    </div>
+                    <h2 style="padding-left: 0.5em;">-</h2>
+                    <div class="row ranking">
+                        <i class="fi fi-sr-trophy-star"></i>
+                        <p>-</p>
+                    </div>
+                </div>
+    
+                <div class="box column" style="max-height: 50vh;">
+                    <div class="user-info column">
+                        <h2 style="margin-bottom: .5em;">Status:</h2>
+                        <div class="status" style="text-align: center;"></div>
+                    </div>
+        
+                    <hr>
+        
+                    <div class="user-info pgn-moves column">
+                        <h2>PGN:</h2>
+                        <table class="pgn">
+                            <tr>
+                                <th></th>
+                                <th>Białe</th>
+                                <th>Czarne</th>
+                            </tr>
+                        </table>
+                    </div>
+        
+                    <hr>
+        
+                    <div class="options center" style="margin-top: 0.5em;">
+                        <!-- <i class="fi fi-sr-undo" action="undo"></i> -->
+                        <i class="fi fi-sr-handshake" action="draw"></i>
+                        <i class="fi fi-sr-flag" action="surrender"></i>
+                    </div>
+                </div>
+    
+                <div class="profile row box horizontal" style="margin-top: 0.5em;" player="player1">
+                    <div class="avatar">
+                        <img>
+                    </div>
+                    <h2 style="padding-left: 0.5em;">-</h2>
+                    <div class="row ranking">
+                        <i class="fi fi-sr-trophy-star"></i>
+                        <p>-</p>
+                    </div>
+                </div>
+                
             </div>
         </div>
+        
 
     </main>
 
-    <script>
-        let playerColor = '{{color}}';
-        console.log('Grasz jako ' + playerColor);
-    </script>
     <script src="/public/js/index.js"></script>
 
 </body>

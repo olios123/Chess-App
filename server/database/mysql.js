@@ -1,11 +1,12 @@
 const mysql = require('mysql2')
+const config = require('./../../config')
 
 const connection = mysql.createConnection({
-    host: '54.38.50.59',
-    user: 'www13678_chess',
-    port: 3306,
-    database: 'www13678_chess',
-    password: 'wTgnfe3RoizDoouVyQQ3'
+    host: config.database.host,
+    user: config.database.user,
+    port: config.database.port,
+    database: config.database.database,
+    password: config.database.password
 })
   
 connection.connect((err) =>

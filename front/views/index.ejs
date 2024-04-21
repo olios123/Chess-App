@@ -27,7 +27,7 @@
                     if (!sessionData.authenticated)
                     { %>
                         <div class="account box center column">
-                            <h2>Nie jesteś zalogowany</h2>
+                            <h2 class="text-center">Nie jesteś zalogowany</h2>
                             <p class="text-center" style="margin-bottom: 1em; font-weight: normal;">Utwórz  konto aby zapisywać swoje postępy!</p>
                             <a class="green button" href="/login">Zaloguj się</a>
                         </div>
@@ -36,7 +36,16 @@
                     { %>
                         <div class="account box">
                             <div class="avatar center">
-                                <img src="<%= sessionData.user.avatar %>" alt="User avatar">
+                                <%
+                                    if (sessionData.user.avatar == '' || sessionData.user.avatar == null)
+                                    { %>
+                                        <img src="/public/assets/icons/profile.png" alt="User avatar">
+                                    <% }
+                                    else
+                                    { %>
+                                        <img src="<%= sessionData.user.avatar %>" alt="User avatar">
+                                    <% }
+                                %>
                             </div>
                             <div class="account-info column">
                                 <div class="account-details row">
@@ -55,21 +64,16 @@
 
                     <% }
                 %>
-                    
-                <a class="find-game column center green">
-                    <img src="/public/assets/pieces/png/White-King.png">
+                
+                <form class="f-game" method="post" action="/game">
+                    <button class="find-game column center green" type="submit">
+                        <img src="/public/assets/pieces/png/White-King.png">
 
-                    <h2 class="text-center">Znajdź przeciwnika</h2>
-                    <p class="text-center">Graj z przeciwnikami z całego świata!</p>
-                </a>
-
-                <script>
-                    $('.find-game').height($('.account').height())
-
-                    $(window).resize(function() {
-                        $('.find-game').height($('.account').height())
-                    })
-                </script>
+                        <h2 class="text-center">Znajdź przeciwnika</h2>
+                        <p class="text-center">Graj z przeciwnikami z całego świata!</p>
+                    </button>
+                </form>
+                
             </div>
             
             
@@ -121,7 +125,7 @@
             window.location.replace('/black?code=' + $('#joinInput').val());
         });
 
-        var urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('error') == 'invalidCode') {
             $('#errorMessage').text('Nieprawidłowy kod. Stwórz pokój lub podaj prawidłowy kod.');
         }

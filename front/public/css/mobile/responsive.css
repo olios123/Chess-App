@@ -84,6 +84,15 @@
     }
 }
 
+/* x < 700px width */
+@media screen and (max-width: 700px)
+{
+    .layer.popup img
+    {
+        height: 4em;
+    }
+}
+
 /* x > 800px width */
 @media screen and (min-width: 800px) 
 {
@@ -241,5 +250,9 @@
     .message button
     {
         padding: 0.5em;
+    }
+    .board
+    {
+        width: 90vw;
     }
 }

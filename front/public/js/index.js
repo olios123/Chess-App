@@ -55,7 +55,6 @@ function onDragStart(source, piece, position, orientation)
             squareElement.appendChild(dot)
         }
     }
-    console.log("======================")
 }
 
 function onDrop(source, target) 
@@ -117,8 +116,12 @@ socket.on('newMove', function(move)
 
 socket.on('opponentSurrendered', (color) =>
 {
-    gameOver = true
-    if (color != playerColor) displayWin("przeciwnik się poddał.")
+    if (gameOver) return
+    if (color != playerColor) 
+    {
+        displayWin("przeciwnik się poddał.")
+        endGame(playerColor)
+    }
 })
 
 socket.on('opponentDrawRequest', (color) =>
@@ -145,6 +148,9 @@ socket.on('opponentDrawRequest', (color) =>
 })
 socket.on('opponentDrawRequestAccepted', () => // Draw accepted
 {
+    if (gameOver) return
+    gameOver = true
+
     displayDraw()
     $('.message').animate({ height: '0px' }, 100)
     message.innerHTML = "" 
@@ -213,8 +219,14 @@ function updateStatus()
     // checkmate?
     if (game.in_checkmate()) 
     {
-        if (localColor != moveColor) displayWin("poprzez <b>mata<b>.") 
-        else displayLose("poprzez <b>mata<b>.")
+        if (localColor != moveColor) 
+        {
+            displayWin("poprzez <b>mata<b>.") 
+        }
+        else 
+        {
+            displayLose("poprzez <b>mata<b>.")
+        }
         
         status = 'Koniec gry, ' + moveColor + ', szach mat.'
     }
@@ -308,16 +320,17 @@ if (playerColor == 'black')
 
 updateStatus()
 
-var urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('code')) 
+if (gameData.code) 
 {
     socket.emit('joinGame', 
     {
-        code: urlParams.get('code')
-    });
+        code: gameData.code,
+        color: playerColor,
+        user
+    })
 }
 
-socket.on('startGame', function() 
+socket.on('startGame', function(data) 
 {
     gameHasStarted = true;
     updateStatus()
@@ -332,10 +345,113 @@ socket.on('startGame', function()
             searchingForOpponent.remove()
         }, 500) // 0.5s
     }
-});
+
+    function fillPlayerData(obj, dat)
+    {
+        // Avatar
+        if (dat.user.avatar == '') obj.children[0].children[0].setAttribute('src', "/public/assets/icons/profile.png")
+        else obj.children[0].children[0].setAttribute('src', dat.user.avatar)
+
+        // Nick
+        if (dat.user.username == '') obj.children[1].textContent = "Anonimowy"
+        else obj.children[1].textContent = dat.user.username
+
+        // Ranking
+        if (dat.user.ranking == '') obj.children[2].children[1].textContent = "-"
+        else obj.children[2].children[1].textContent = dat.user.ranking
+    }
+
+    // Fill players data
+    const player1 = document.querySelectorAll('div[player=player1]') // bottom
+    const player2 = document.querySelectorAll('div[player=player2]') // top
+
+    if (playerColor == data.gameData.players[0].color) 
+    {
+        player1.forEach(pl => {
+            fillPlayerData(pl, data.gameData.players[0])
+        })
+    }
+    else 
+    {
+        player2.forEach(pl => {
+            fillPlayerData(pl, data.gameData.players[0])
+        })
+    }
+
+    if (playerColor == data.gameData.players[1].color)
+    {
+        player1.forEach(pl => {
+            fillPlayerData(pl, data.gameData.players[1])
+        })
+    }
+    else
+    {
+        player2.forEach(pl => {
+            fillPlayerData(pl, data.gameData.players[1])
+        })
+    }
+
+    // Fill popup data
+    const youWin = document.getElementById('win')
+    const youLose = document.getElementById('lose')
+    const draw = document.getElementById('draw')
+
+    if (playerColor == data.gameData.players[0].color)
+    {
+        // You
+        fillPopupData(youWin.children[0].children[0].children[2].children[0].children[0],
+            data.gameData.players[0], data.gameData.players[0].user.ranking + " + 6")
+        fillPopupData(youLose.children[0].children[0].children[2].children[0].children[0],
+            data.gameData.players[0], data.gameData.players[0].user.ranking + " - 6")
+        fillPopupData(draw.children[0].children[0].children[2].children[0].children[0],
+            data.gameData.players[0], data.gameData.players[0].user.ranking)
+
+        // Oponnent
+        fillPopupData(youWin.children[0].children[0].children[2].children[0].children[2],
+            data.gameData.players[1], data.gameData.players[1].user.ranking + " - 6")
+        fillPopupData(youLose.children[0].children[0].children[2].children[0].children[2],
+            data.gameData.players[1], data.gameData.players[1].user.ranking + " + 6")
+        fillPopupData(draw.children[0].children[0].children[2].children[0].children[2],
+            data.gameData.players[1], data.gameData.players[1].user.ranking)
+    }
+    else
+    {
+        // You
+        fillPopupData(youWin.children[0].children[0].children[2].children[0].children[2],
+            data.gameData.players[0], data.gameData.players[0].user.ranking + " - 6")
+        fillPopupData(youLose.children[0].children[0].children[2].children[0].children[2],
+            data.gameData.players[0], data.gameData.players[0].user.ranking + " + 6")
+        fillPopupData(draw.children[0].children[0].children[2].children[0].children[2],
+            data.gameData.players[0], data.gameData.players[0].user.ranking)
+
+        // Oponnent
+        fillPopupData(youWin.children[0].children[0].children[2].children[0].children[0],
+            data.gameData.players[1], data.gameData.players[1].user.ranking + " + 6")
+        fillPopupData(youLose.children[0].children[0].children[2].children[0].children[0],
+            data.gameData.players[1], data.gameData.players[1].user.ranking + " - 6")
+        fillPopupData(draw.children[0].children[0].children[2].children[0].children[0],
+            data.gameData.players[1], data.gameData.players[1].user.ranking)
+    }
+
+    function fillPopupData(obj, dat, rk)
+    {
+        // Avatar
+        if (dat.user.avatar == '') obj.children[0].setAttribute('src', "/public/assets/icons/profile.png")
+        else obj.children[0].setAttribute('src', dat.user.avatar)
+
+        // Nick
+        if (dat.user.username == '') obj.children[1].textContent = "Anonimowy"
+        else obj.children[1].textContent = dat.user.username
+
+        // Ranking
+        if (dat.user.ranking == '') obj.children[2].textContent = "-"
+        else obj.children[2].textContent = rk
+    }
+})
 
 socket.on('gameOverDisconnect', function() 
 {
+    if (gameOver) return
     gameOver = true;
     updateStatus()
 })
@@ -346,6 +462,8 @@ function displayWin(reason)
     win.children[0].children[0].children[1].innerHTML = reason
 
     $('#win').fadeTo(100, 1);
+
+    endGame(gameData.color)
 }
 
 function displayLose(reason)
@@ -412,3 +530,12 @@ surrender.forEach(el =>
         socket.emit('surrender', playerColor)
     })
 })
+
+function endGame(winColor)
+{
+    gameOver = true
+    socket.emit('endGame', { 
+        code: gameData.code,
+        win: winColor
+    })
+}

@@ -8,5 +8,6 @@ const animImg = document.createElement("img")
 animImg.src = "/public/assets/pieces/png/" +
     c[Math.floor(Math.random() * c.length)] + "-" +
     p[Math.floor(Math.random() * p.length)] + ".png"
+animImg.style.height = "auto"
 
 anim.appendChild(animImg)

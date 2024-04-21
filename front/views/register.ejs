@@ -19,18 +19,21 @@
         </a>
 
         <div class="login-form">
-            <form action="/accountLogin" method="post" class="column">
+            <form action="/accountRegister" method="post" class="column">
                 <label for="username">Nick</label>
                 <input type="text" id="username" name="username" required>
     
                 <label for="password">Hasło</label>
                 <input type="password" id="password" name="password" required>
+
+                <label for="confirmPassword">Potwierdź hasło</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
     
-                <input type="submit" value="Zaloguj się">
+                <input type="submit" value="Zarejestuj się">
             </form>
-            <p class="text-center">Nie masz jeszcze konta ?</p>
+            <p class="text-center">Masz już konto ?</p>
             <span class="text-center" style="width: 100%; display: block;">
-                <a id="login" href="/register">Zarejestruj się</a>
+                <a id="login" href="/login">Zaloguj się</a>
             </span>
         </div>
         <div class="text-center" style="color: red; margin: 0.75em 0 0.5em 0;" id="errorMessage"></div>
@@ -42,11 +45,12 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('error') == 'invalid') 
+        if (urlParams.get('error') == 'err') 
         {
-            $('#errorMessage').text('Nieprawiłowy login lub hasło.');
+            $('#errorMessage').text('Wystąpił błąd.');
         }
     </script>
+
     
 </body>
 </html>

@@ -21,7 +21,7 @@ const store = new session.MemoryStore()
 
 server.listen(config.port);
 
-games = {};
+games = {}
 
 myIo(io);
 
@@ -54,4 +54,5 @@ app.set('views', path.join(__dirname, '..', 'front', 'views'));
 app.use('/public', express.static(path.join(__dirname, '..', 'front', 'public')));
 app.set('view engine', 'ejs');
 
-routes(app);
+routes(app)
+

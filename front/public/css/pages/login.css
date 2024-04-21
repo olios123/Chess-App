@@ -1,0 +1,71 @@
+.background
+{
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./../../assets/gif/game1.gif");
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: center;
+    filter: blur(2px);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+main
+{
+    width: auto;
+    height: auto;
+    z-index: 2;
+    padding: 2em 2em 4em 2em;
+    border-radius: 1em;
+    border: 2px solid var(--secondary-color);
+    overflow-x: hidden;
+    position: relative;
+}
+
+form input,
+a.button
+{
+    padding: 0.5em 1em;
+    font-size: 1em;
+    margin: 0.5em 0 1em 0;
+    text-align: center;
+    width: 90%;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    color: var(--accent-color);
+}
+
+.header-main
+{
+    font-size: 2em;
+    margin-bottom: 2em;
+}
+
+span.text-center a
+{
+    color: var(--green-color);
+}
+
+a.button
+{
+    width: auto;
+    position: absolute;
+    left: 0.5em;
+    bottom: 0.5em;
+    margin: 0;
+    z-index: 3;
+}
+
+div#errorMessage
+{
+    padding: 0.8em;
+    border-radius: 1em;
+}
+div#errorMessage:empty
+{
+    padding: 0;
+}

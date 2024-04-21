@@ -34,8 +34,6 @@ section
 #myBoard 
 {
     display: block;
-    width: 100%;
-    height: auto;
     aspect-ratio: 1 / 1;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -46,12 +44,13 @@ section
 
 .board
 {
-    width: 100%;
-    height: auto;
+    width: 75vw;
+    height: 100%;
     aspect-ratio: 1 / 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -163,15 +162,11 @@ article.black[dot]
 
 .panel
 {
-    width: 100%;
     height: auto;
+    width: 100%;
     padding: .2em 0;
     border-radius: .5em;
     margin: 1em 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .panel i:hover,
@@ -180,10 +175,22 @@ article.black[dot]
     background-color: var(--hover-color);
 }
 
+.panel .avatar
+{
+    height: 100%;
+    width: auto;
+}
+.panel .avatar img
+{
+    display: flex;
+    aspect-ratio: 1 / 1;
+    max-height: 100%;
+    border-radius: .5em;
+}
+
 .right-panel
 {
-    width: auto;
-    width: 25vw;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -246,9 +253,10 @@ article.black[dot]
 }
 .right-panel.horizontal
 {
-    height: 50vh;
+    height: auto;
     justify-content: space-between;
     padding: 1em;
+    max-width: 400px;
 }
 
 .layer.popup
@@ -261,6 +269,12 @@ article.black[dot]
 {
     opacity: 0;
     transition: 0.5s ease-in-out opacity;
+}
+.layer.popup img
+{
+    aspect-ratio: 1 / 1;
+    border-radius: 0.5em;
+    height: 6em;
 }
 
 .searching-for-opponent .box,
@@ -322,10 +336,11 @@ article.black[dot]
     }
 }
 
-.you-win .box
+.you-win .box,
+.you-lose .box
+.draw .box
 {
-    border: 0.5em solid;
-    border-color: var(--green-color);
+    border: 3px solid var(--secondary-color);
     padding: 1em 2em;
 }
 .you-win .box p,
@@ -348,20 +363,6 @@ article.black[dot]
 .draw .box a:nth-child(3)
 {
     background-color: var(--green-color);
-}
-
-.you-lose .box
-{
-    border: 0.5em solid;
-    border-color: var(--red-color);
-    padding: 1em 2em;
-}
-
-.draw .box
-{
-    border: 0.5em solid;
-    border-color: var(--secondary-color);
-    padding: 1em 2em;
 }
 
 table.pgn
@@ -418,4 +419,59 @@ table.pgn tr:nth-child(even)
 .message:empty
 {
     padding: 0;
+}
+
+.profile
+{
+    width: 100%;
+    height: auto;
+    padding-right: 0.5em;
+}
+.profile .avatar
+{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    width: auto;
+}
+.profile .avatar img
+{
+    max-height: 100%;
+    border-radius: .25em;
+}
+
+.profile p
+{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile h2
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+}
+.profile .ranking
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.profile .ranking i
+{
+    margin: 0;
+}
+
+.profile.horizontal
+{
+    height: 5em;
+    padding: 0.5em;
+}
+
+.profiles
+{
+    width: 10em;
 }
