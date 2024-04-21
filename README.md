@@ -41,7 +41,8 @@ You should then see `Server listening on port {PORT}`. This means that the serve
 
 # Screenshots
 
-<img src="https://cdn.discordapp.com/attachments/1009784232601718825/1230192043163123852/Zrzut_ekranu_2024-04-17_182341.png?ex=66326c9e&is=661ff79e&hm=0dc9f0a081eb560da6e4e04cc73c9bc29f8e16f827843beac36ad01cdf8dfe35&" alt="Chess main page">
+
+<img src="https://cdn.discordapp.com/attachments/1009784232601718825/1231591202441400350/Zrzut_ekranu_2024-04-21_150322.png?ex=663783b0&is=66250eb0&hm=519fc8bcd55ad11c9516d9b42b3c5c042ed78424c081af81f161faf2e203f200&" alt="Chess main page">
 
 # Development plans
 - Adding English language
