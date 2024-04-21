@@ -13,9 +13,10 @@
         }
         let user = {
             username: '<%= data.user.username %>',
-            avatar: '<%= data.user.avatar %>',
+            avatar: decodeURIComponent('<%= data.user.avatar %>'),
             ranking: '<%= data.user.ranking %>'
         }
+        user.avatar = user.avatar.replace(/&amp;/g, '&')
         let playerColor = gameData.color
     </script>
 
@@ -180,7 +181,7 @@
             </table>
         </div>
 
-        <div class="center" style="width: 100%; height: 100%;">
+        <div class="center" style="height: 100%;">
             <div class="right-panel horizontal column">
             
                 <div class="profile row box horizontal" style="margin-bottom: 0.5em;" player="player2">

@@ -5,6 +5,8 @@ let stat = document.querySelectorAll('.status')
 let pgn = document.querySelectorAll('.pgn')
 let gameOver = false;
 
+let selectedPiece = null
+
 function onDragStart(source, piece, position, orientation) 
 {
     // do not pick up pieces if the game is over
@@ -21,6 +23,55 @@ function onDragStart(source, piece, position, orientation)
         return false
     }
 
+    clearMoves()
+
+    selectedPiece = source
+    generateMoves(source)
+}
+
+function onDrop(source, target) 
+{
+    let theMove = {
+        from: source,
+        to: target,
+        promotion: 'q' // NOTE: always promote to a queen for simplicity
+    };
+    // see if the move is legal
+    var move = game.move(theMove);
+
+    clearMoves()
+
+    // Click
+    if (source == target)
+    {
+        generateMoves(source)
+        return
+    }
+
+    movePiece(theMove, move)
+}
+
+function movePiece(theMove, move)
+{
+    // illegal move
+    if (move === null) return 'snapback'
+
+    socket.emit('move', theMove);
+    selectedPiece = null
+
+    // If player moved piece reject all requests
+    const message = document.querySelector(".message")
+    $('.message').animate({ height: '0px' }, 100)
+    message.innerHTML = ""
+
+    socket.emit('rejectDrawRequest', playerColor)
+    socket.emit('rejectUndoRequest', playerColor)
+
+    updateStatus()
+}
+
+function generateMoves(source)
+{
     // Get all squares from selected piece
     for (let square of game.moves({ 'square': source }))
     {
@@ -57,16 +108,8 @@ function onDragStart(source, piece, position, orientation)
     }
 }
 
-function onDrop(source, target) 
+function clearMoves()
 {
-    let theMove = {
-        from: source,
-        to: target,
-        promotion: 'q' // NOTE: always promote to a queen for simplicity
-    };
-    // see if the move is legal
-    var move = game.move(theMove);
-
     // Remove all dots
     const dots = document.querySelectorAll(".dot")
     dots.forEach(dot => 
@@ -80,23 +123,6 @@ function onDrop(source, target)
     {
         atc.classList.remove('attack')
     })
-
-
-    // illegal move
-    if (move === null) return 'snapback'
-
-    socket.emit('move', theMove);
-
-    // If player moved piece reject all requests
-    const message = document.querySelector(".message")
-    $('.message').animate({ height: '0px' }, 100)
-    message.innerHTML = ""
-
-    socket.emit('rejectDrawRequest', playerColor)
-    socket.emit('rejectUndoRequest', playerColor)
-
-
-    updateStatus()
 }
 
 socket.on('newMove', function(move) 
@@ -330,6 +356,27 @@ if (gameData.code)
     })
 }
 
+// Move by click
+document.querySelectorAll('.square-55d63').forEach(el =>
+{
+    el.addEventListener('click', () =>
+    {
+        if (selectedPiece == null) return
+
+        let theMove = {
+            from: selectedPiece,
+            to: el.getAttribute('data-square'),
+            promotion: 'q'
+        }
+        // see if the move is legal
+        var move = game.move(theMove)
+
+        movePiece(theMove, move)
+        clearMoves()
+        selectedPiece = null
+    }, true)
+})
+
 socket.on('startGame', function(data) 
 {
     gameHasStarted = true;
@@ -349,8 +396,8 @@ socket.on('startGame', function(data)
     function fillPlayerData(obj, dat)
     {
         // Avatar
-        if (dat.user.avatar == '') obj.children[0].children[0].setAttribute('src', "/public/assets/icons/profile.png")
-        else obj.children[0].children[0].setAttribute('src', dat.user.avatar)
+        if (dat.user.avatar == '') obj.children[0].children[0].src = "/public/assets/icons/profile.png"
+        else obj.children[0].children[0].src = getAvatar(dat.user.avatar)
 
         // Nick
         if (dat.user.username == '') obj.children[1].textContent = "Anonimowy"
@@ -436,8 +483,8 @@ socket.on('startGame', function(data)
     function fillPopupData(obj, dat, rk)
     {
         // Avatar
-        if (dat.user.avatar == '') obj.children[0].setAttribute('src', "/public/assets/icons/profile.png")
-        else obj.children[0].setAttribute('src', dat.user.avatar)
+        if (dat.user.avatar == '') obj.children[0].src = "/public/assets/icons/profile.png"
+        else obj.children[0].src = getAvatar(dat.user.avatar)
 
         // Nick
         if (dat.user.username == '') obj.children[1].textContent = "Anonimowy"
@@ -538,4 +585,9 @@ function endGame(winColor)
         code: gameData.code,
         win: winColor
     })
+}
+
+function getAvatar(a)
+{
+    return a.replace(/&amp;/g, '&')
 }
