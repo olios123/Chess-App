@@ -80,7 +80,6 @@ module.exports = io => {
         // Disconnecting
         socket.on('disconnect', function() 
         {
-            console.log(currentCode, handleDisconnecting)
             if (currentCode && handleDisconnecting) 
             {
                 io.to(currentCode).emit('gameOverDisconnect')
