@@ -46,9 +46,6 @@ You should then see `Server listening on port {PORT}`. This means that the serve
 
 # Development plans
 - Adding English language
-- Account system
-- Automatic game creation and search
-- Ranking system
 - Chessboard, pieces and page customization
 ---
 > [!NOTE]
